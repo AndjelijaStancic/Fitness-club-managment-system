@@ -1,0 +1,46 @@
+*
+{
+    padding: 3px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+body{
+    background-image:url(../images/tab.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+table{
+    margin-top: 1cm;
+    margin-left: 2cm;
+    width:1000px;
+    background-color: rgba(252, 252, 252, 0.527);
+}
+caption{
+    color:white;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5mm;
+    text-align: left;
+}
+th{
+    text-align: center;
+    font-size: 6mm;
+    letter-spacing: 1px;  
+}
+td{
+    font-size: 5mm;
+}
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+button{
+    font-size:10px;
+    font-weight: bold;
+    border-radius: 10px;
+    width: 2cm;
+    border 0;
+    color: black;
+    background-color: rgba(255, 253, 242, 0.527);
+}
