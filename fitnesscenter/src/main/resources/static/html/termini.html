@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fitness</title>
+    <link href="css/termin.css" type="text/css" rel="Stylesheet"/>
+    <!-- 1. Ukljucivanje jQuery biblioteke -->
+    <script src="js/jquery.min.js"></script>
+    <!-- 2. Ukljucivanje jQuery Validate biblioteke za validaciju polja forme (opciono).
+            O načinu upotrebe pogledati na: https://jqueryvalidation.org/ -->
+    <script src="js/jquery.validate.min.js"></script>
+    <!-- 3. Ukljucivanje naseg JS fajla -->
+    <script src="js/termini.js"></script>
+</head>
+<body>
+
+<nav>
+    <div class="menu-bar">  
+        <ul>
+            <li><a href="index.html">POČETNA STRANICA</a></li>
+            <li><a href="onama.html">O NAMA</a></li>
+            <li class="active"><a href="termini.html">TERMINI</a></li>
+            <li><a href="cenovnik.html">CENOVNIK</a></li>
+            <li><a href="reg.html">REGISTRACIJA</a></li>
+            <li><a href="prij.html">PRIJAVA</a></li>
+            <li><a href="administrator.html">ADMINISTRATOR</a></li>
+            
+        </ul>
+    </div>
+</nav>
+<div class="header">
+    <div class="inner-header">
+        <h1>ULTIMATE <br/>FITNESS</h1>
+    </div>
+</div>
+
+<div class="kriterijum">
+<table>
+<form id="forma" name = "forma" method="POST">
+<tr>
+<th><label class="reg-radio">Prikaži sve termine
+<input id="btn1" type="radio" name="radio" value="svitermini">
+    
+</label></th>
+<th><label class="reg-radio">Kriterijum
+<input id="btn1" type="radio" name="radio" value="kriterijum">
+</label></th>
+<th><input type="text" name="maksimalnaCena" placeholder="maksimalna cena"></th>
+<th><input type="text" name="maksimalnoTrajanje" placeholder="maksimalno trajanje"></th>
+<th><input type="text" name="mesec" placeholder="termin pre odredjenog meseca(1-12)"></th>
+<th><select name ="naziv" id = "nazivId">
+    <option value="sve">NAZIV TRENINGA</option>
+    <option value = "mrsavljenje">MRSAVLJENJE</option>
+    <option value = "snaga">SNAGA</option>
+    <option value = "linija">LINIJA</option>
+</th>
+<th><select name="tip" id = "tipId">
+    <option value="sve">TIP TRENINGA</option>
+    <option value="grupni">GRUPNI</option>
+    <option value="individualni">INDIVIDUALNI</option>
+</th>
+<th><select name="opis" id = "opisId">
+    <option value ="sve">OPIS TRENINGA</option>
+    <option value ="aerobik">AEROBIK</option>
+    <option value ="krosfit">KROSFIT</option>
+    <option value ="kardio">KARDIO</option>
+    <option value ="boks">BOKS</option>
+    <option value ="joga">JOGA</option>
+    <option value ="plivanje">PLIVANJE</option>
+</th>
+<th><input id = "trazi" type = "submit" value = "TRAŽI"/></th>
+</tr>
+</form>
+</table>
+</div>
+
+<div class="sviTermini">
+<div class="container">
+<table id="termini">
+    <tr>
+        <th onclick="sortirajBr(0)">ID</th>
+        <th onclick="sortiraj(1)">Pocetak termina</th>
+        <th onclick="sortiraj(2)">Kraj termina</th>
+        <th onclick="sortirajBr(3)">Trajanje termina</th>
+        <th onclick="sortirajBr(4)">Cena termina</th>
+        <th onclick="sortiraj(5)">Naziv treninga</th>
+        <th onclick="sortiraj(6)">Tip treninga</th>
+        <th onclick="sortiraj(7)">Opis treninga</th>
+    </tr>
+</table>
+<div>
+</div>
+</body>
+</html>

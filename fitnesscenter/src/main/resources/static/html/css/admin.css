@@ -1,0 +1,77 @@
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image:url(../images/admin.png);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.menu-bar{
+    background-color:rgba(110, 110, 110, 0.4);
+    text-align:center;
+}
+.menu-bar ul{
+    display: inline-flex;
+    list-style:none;
+    font-size: 15px;
+}
+.menu-bar ul li{
+    width: 180px;
+    margin: 5px;
+    padding: 5px;
+}
+.menu-bar ul li a{
+    text-decoration: none;
+    color: white;
+}
+.active, .menu-bar ul li :hover
+{
+    background-color:rgba(252, 227, 227, 0.288);
+    border-radius: 3px;
+}
+.login-form{
+    top: 50%;
+    left: 55%;
+    align-items: center;
+    width: : 100%;
+    transform : translate(-50%,-50%);
+    position: absolute;
+}
+.login-form h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    font-size:30px;
+    text-transform: uppercase;
+    color: white;
+    margin-left: 1cm;
+}
+.prijava{
+    margin-left: 80px;
+}
+.login-form input{
+    font-size: 16px;
+    width: 350px;
+    padding: 15px 10px;
+    border: 0;
+    outline: none;
+    border-radius: 7px;
+}
+.login-form button{
+    margin-left: 50px;
+    margin-top: 22px;
+    font-size:18px;
+    font-weight: bold;
+    padding: 15px 20px;
+    width: 50%;
+    border-radius: 10px;
+    border 0;
+    color: black;
+}
+.login-form p{
+    color: white;
+    font-size: 5mm;
+}
+
