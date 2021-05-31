@@ -1,0 +1,98 @@
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image:url(../images/admin.png);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.menu-bar{
+    background-color:rgba(0, 0, 0, 0.4);
+    text-align:center;
+    margin-bottom: 1cm;
+}
+.menu-bar ul{
+    display: inline-flex;
+    list-style:none;
+    font-size: 15px;
+}
+.menu-bar ul li{
+    width: 180px;
+    margin: 5px;
+    padding: 5px;
+}
+.menu-bar ul li a{
+    text-decoration: none;
+    color: white;
+}
+.active, .menu-bar ul li :hover
+{
+    background-color:rgba(252, 227, 227, 0.288);
+    border-radius: 3px;
+}
+.header{ 
+    
+    width: 100%;
+    height: 30px;
+    color: white;
+    text-align: center;
+    margin:10px;
+    font-size: 14px;
+    letter-spacing: 5px;
+    font-family:'Times New Roman', Times, serif
+}
+.inner-header{
+    width: 800px;
+    display: block;
+    margin: 0 auto;   
+}
+table, th, td {
+    margin-top: 2cm;
+    border: 1px solid rgb(253, 250, 250);
+    color: white;
+    background-color: rgba(54, 54, 54, 0.212);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    
+  }
+table {
+    width: 100%;
+    height: 1cm;
+    border-collapse: collapse;
+}
+td {
+    text-align: center;
+    height: 30px;
+  }
+th {
+    height: 40px;
+}
+.stil tr:hover {background-color: #c2c2c27e;}
+
+.stil{
+margin-top: 1cm;
+width: 100%;
+background-color: rgba(17, 17, 17, 0.822);
+}
+.stil th{
+    height: 1.25cm;
+}
+
+button{
+    font-size:10px;
+    font-weight: bold;
+    border-radius: 10px;
+    width: 3cm;
+    border 0;
+    color: white;
+}
+
+.submit button{
+    background-color: rgb(37, 134, 34);
+}
+.reject button{
+    background-color: rgba(204, 59, 59, 0.897);
+}
