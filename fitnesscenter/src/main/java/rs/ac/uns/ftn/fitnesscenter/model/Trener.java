@@ -2,7 +2,7 @@ package rs.ac.uns.ftn.fitnesscenter.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +10,7 @@ import java.util.Set;
 public class Trener implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, unique = true,name="korisnicko_ime")
     private String korisnickoIme;
@@ -47,11 +47,38 @@ public class Trener implements Serializable {
 
     public Trener() { }
 
-    public long getId(){
+    public Trener(Long id, String korisnickoIme, String ime, String prezime, String sifra, String email, Date datumRodjenja, String telefon, Boolean aktivan, double prosecnaOcena, FitnessCentar fitnessCentar, Set<Termin> terminiTrenera) {
+        this.id = id;
+        this.korisnickoIme = korisnickoIme;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.sifra = sifra;
+        this.email = email;
+        this.datumRodjenja = datumRodjenja;
+        this.telefon = telefon;
+        this.aktivan = aktivan;
+        this.prosecnaOcena = 0.0;
+        this.fitnessCentar = fitnessCentar;
+        this.terminiTrenera = terminiTrenera;
+    }
+
+    public Trener(String korisnickoIme, String ime, String prezime, String sifra, String email, Date datumRodjenja, String telefon, Boolean aktivan) {
+        this.korisnickoIme = korisnickoIme;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.sifra = sifra;
+        this.email = email;
+        this.datumRodjenja = datumRodjenja;
+        this.telefon = telefon;
+        this.aktivan = aktivan;
+        this.prosecnaOcena = 0.0;
+    }
+
+    public Long getId(){
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

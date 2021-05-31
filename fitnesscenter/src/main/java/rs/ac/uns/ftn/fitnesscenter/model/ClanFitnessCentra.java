@@ -2,7 +2,7 @@ package rs.ac.uns.ftn.fitnesscenter.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +12,7 @@ public class ClanFitnessCentra implements Serializable {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long id;
+        private Long id;
 
         @Column(nullable = false, unique = true, name="korisnicko_ime")
         private String korisnickoIme;
@@ -55,9 +55,35 @@ public class ClanFitnessCentra implements Serializable {
 
         public ClanFitnessCentra() { }
 
-        public long getId() { return id; }
+        public ClanFitnessCentra(Long id, String korisnickoIme, String ime, String prezime, String sifra, String email, String telefon, Date datumRodjenja, Boolean aktivan, Set<Ocena> ocenaTermina, Set<Termin> odradjeniTermini, Set<Termin> prijavljeniTermini) {
+                this.id = id;
+                this.korisnickoIme = korisnickoIme;
+                this.ime = ime;
+                this.prezime = prezime;
+                this.sifra = sifra;
+                this.email = email;
+                this.telefon = telefon;
+                this.datumRodjenja = datumRodjenja;
+                this.aktivan = aktivan;
+                this.ocenaTermina = ocenaTermina;
+                this.odradjeniTermini = odradjeniTermini;
+                this.prijavljeniTermini = prijavljeniTermini;
+        }
 
-        public void setId(long id) {
+        public ClanFitnessCentra(String korisnickoIme, String ime, String prezime, String sifra, String email, String telefon, Date datumRodjenja, Boolean aktivan) {
+                this.korisnickoIme = korisnickoIme;
+                this.ime = ime;
+                this.prezime = prezime;
+                this.sifra = sifra;
+                this.email = email;
+                this.telefon = telefon;
+                this.datumRodjenja = datumRodjenja;
+                this.aktivan = aktivan;
+        }
+
+        public Long getId() { return id; }
+
+        public void setId(Long id) {
                 this.id = id;
         }
 

@@ -128,10 +128,7 @@ body{
   display: none;
 }
 
-.datumrodj{
-  margin-left: 1cm;
-  margin-bottom: 4mm;
-}
+
 .reg-radio input:checked ~ .checkmark:after {
   display: block;
 }
