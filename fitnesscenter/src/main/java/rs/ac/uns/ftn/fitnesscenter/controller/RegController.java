@@ -5,11 +5,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.fitnesscenter.model.ClanFitnessCentra;
+import rs.ac.uns.ftn.fitnesscenter.model.Termin;
 import rs.ac.uns.ftn.fitnesscenter.model.Trener;
-import rs.ac.uns.ftn.fitnesscenter.model.dto.ClanDTO;
-import rs.ac.uns.ftn.fitnesscenter.model.dto.KriterijumDTO;
-import rs.ac.uns.ftn.fitnesscenter.model.dto.RegDTO;
-import rs.ac.uns.ftn.fitnesscenter.model.dto.TerminDTO;
+import rs.ac.uns.ftn.fitnesscenter.model.dto.*;
 import rs.ac.uns.ftn.fitnesscenter.service.ClanFitnessCentraService;
 import rs.ac.uns.ftn.fitnesscenter.service.TrenerService;
 
@@ -44,15 +42,45 @@ public class RegController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE,
             value = "/Trener")
-    public ResponseEntity<ClanDTO> getTrener(@RequestBody RegDTO dolazna) throws Exception {
+    public ResponseEntity<TrenerDTO> getTrener(@RequestBody RegDTO dolazna) throws Exception {
         Trener trener = new Trener(dolazna.getKorisnickoIme(),dolazna.getIme(),dolazna.getPrezime(),dolazna.getSifra(),
-                dolazna.getEmail(),dolazna.getDatumRodjenja(),dolazna.getKontaktTelefon(),false);
+                dolazna.getEmail(),dolazna.getDatumRodjenja(),dolazna.getKontaktTelefon(),false,false, 0.0);
         Trener noviTrener = trenerService.create(trener);
 
-        ClanDTO clanDTO = new ClanDTO(noviTrener.getIme(),noviTrener.getPrezime(),noviTrener.getEmail(),noviTrener.getKorisnickoIme(),
+        TrenerDTO trenerDTO = new TrenerDTO(noviTrener.getId(),noviTrener.getIme(),noviTrener.getPrezime(),noviTrener.getEmail(),noviTrener.getKorisnickoIme(),
                 noviTrener.getTelefona(), noviTrener.getDatumRodjenja(),noviTrener.getSifra(), noviTrener.getAktivan());
 
-        return new ResponseEntity<>(clanDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>(trenerDTO, HttpStatus.CREATED);
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="zahtevi")
+    public ResponseEntity<List<TrenerDTO>> getRequests() {
+        List<TrenerDTO> trenerList = this.trenerService.findRequests();
+
+        return new ResponseEntity<>(trenerList, HttpStatus.OK);
+    }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            value = "/approve/{id}")
+    public ResponseEntity<TrenerDTO> approve(@PathVariable Long id) throws Exception{
+        Trener trener = trenerService.activate(id);
+        TrenerDTO trenerDTO = new TrenerDTO(trener.getId(),trener.getIme(),trener.getPrezime(),trener.getEmail(),
+                trener.getKorisnickoIme(),trener.getTelefona(),trener.getDatumRodjenja(),trener.getSifra(),
+                trener.getAktivan());
+
+        return new ResponseEntity<>(trenerDTO,HttpStatus.OK);
+    }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            value = "/reject/{id}")
+    public ResponseEntity<TrenerDTO> reject(@PathVariable Long id) throws Exception{
+        Trener trener = trenerService.deactivate(id);
+        TrenerDTO trenerDTO = new TrenerDTO(trener.getId(),trener.getIme(),trener.getPrezime(),trener.getEmail(),
+                trener.getKorisnickoIme(),trener.getTelefona(),trener.getDatumRodjenja(),trener.getSifra(),
+                trener.getAktivan());
+
+        return new ResponseEntity<>(trenerDTO,HttpStatus.OK);
+    }
 }

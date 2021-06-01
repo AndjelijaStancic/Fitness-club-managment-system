@@ -36,6 +36,9 @@ public class Trener implements Serializable {
     @Column(nullable = false)
     private Boolean aktivan;
 
+    @Column(nullable = false)
+    private Boolean obrisan;
+
     @Column(name="prosecna_ocena")
     private double prosecnaOcena;
 
@@ -47,7 +50,7 @@ public class Trener implements Serializable {
 
     public Trener() { }
 
-    public Trener(Long id, String korisnickoIme, String ime, String prezime, String sifra, String email, Date datumRodjenja, String telefon, Boolean aktivan, double prosecnaOcena, FitnessCentar fitnessCentar, Set<Termin> terminiTrenera) {
+    public Trener(Long id, String korisnickoIme, String ime, String prezime, String sifra, String email, Date datumRodjenja, String telefon, Boolean aktivan, Boolean obrisan, double prosecnaOcena) {
         this.id = id;
         this.korisnickoIme = korisnickoIme;
         this.ime = ime;
@@ -57,12 +60,11 @@ public class Trener implements Serializable {
         this.datumRodjenja = datumRodjenja;
         this.telefon = telefon;
         this.aktivan = aktivan;
-        this.prosecnaOcena = 0.0;
-        this.fitnessCentar = fitnessCentar;
-        this.terminiTrenera = terminiTrenera;
+        this.obrisan = obrisan;
+        this.prosecnaOcena = prosecnaOcena;
     }
 
-    public Trener(String korisnickoIme, String ime, String prezime, String sifra, String email, Date datumRodjenja, String telefon, Boolean aktivan) {
+    public Trener(String korisnickoIme, String ime, String prezime, String sifra, String email, Date datumRodjenja, String telefon, Boolean aktivan, Boolean obrisan, double prosecnaOcena) {
         this.korisnickoIme = korisnickoIme;
         this.ime = ime;
         this.prezime = prezime;
@@ -71,7 +73,8 @@ public class Trener implements Serializable {
         this.datumRodjenja = datumRodjenja;
         this.telefon = telefon;
         this.aktivan = aktivan;
-        this.prosecnaOcena = 0.0;
+        this.obrisan = obrisan;
+        this.prosecnaOcena = prosecnaOcena;
     }
 
     public Long getId(){
@@ -163,4 +166,12 @@ public class Trener implements Serializable {
     public Set<Termin> getTerminiTrenera() { return terminiTrenera; }
 
     public void setTerminiTrenera(Set<Termin> terminiTrenera) { this.terminiTrenera = terminiTrenera; }
+
+    public Boolean getObrisan() {
+        return obrisan;
+    }
+
+    public void setObrisan(Boolean obrisan) {
+        this.obrisan = obrisan;
+    }
 }

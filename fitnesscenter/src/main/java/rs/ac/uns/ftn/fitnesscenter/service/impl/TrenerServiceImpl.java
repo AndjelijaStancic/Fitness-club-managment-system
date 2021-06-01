@@ -49,8 +49,8 @@ public class TrenerServiceImpl implements TrenerService {
             List<TrenerDTO> trenerDTO = new ArrayList<>();
 
             for(Trener trener : treners){
-                if(!trener.getAktivan()){
-                    TrenerDTO trenerDTO1 = new TrenerDTO(trener.getIme(),trener.getPrezime(),trener.getEmail(),trener.getKorisnickoIme(),
+                if(!trener.getAktivan() && !trener.getObrisan()){
+                    TrenerDTO trenerDTO1 = new TrenerDTO(trener.getId(),trener.getIme(),trener.getPrezime(),trener.getEmail(),trener.getKorisnickoIme(),
                             trener.getTelefona(),trener.getDatumRodjenja(),trener.getSifra(),false);
                     trenerDTO.add(trenerDTO1);
                 }
@@ -60,14 +60,26 @@ public class TrenerServiceImpl implements TrenerService {
 
         @Override
         public Trener activate(Long id) throws Exception{
-            Trener trener = this.trenerRepository.getOne(id);
-            if(trener == null){
-                throw new Exception("Ne postoji trener sa ovim id-em");
-            }
-            trener.setAktivan(true);
+        Trener trener = this.trenerRepository.getOne(id);
+        if(trener == null){
+            throw new Exception("Ne postoji trener sa ovim id-em");
+        }
+        trener.setAktivan(true);
 
-            Trener trener1 = this.trenerRepository.save(trener);
-            return trener1;
+        Trener trener1 = this.trenerRepository.save(trener);
+        return trener1;
         }
 
+         @Override
+        public Trener deactivate(Long id) throws Exception{
+        Trener trener = this.trenerRepository.getOne(id);
+        if(trener == null){
+            throw new Exception("Ne postoji trener sa ovim id-em");
+        }
+        trener.setObrisan(true);
+        trener.setAktivan(false);
+
+        Trener trener1 = this.trenerRepository.save(trener);
+        return trener1;
+        }
 }

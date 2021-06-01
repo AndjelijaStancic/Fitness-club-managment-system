@@ -24,10 +24,7 @@ public class TerminController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/svi")
     public ResponseEntity<List<TerminDTO>> getTermini() {
-        // Pozivanjem metode servisa dobavljamo sve zaposlene
         List<Termin> terminList = this.terminService.findAll();
-
-        // Kreiramo listu DTO objekata koju ćemo vratiti u odgovoru na zahtev
         List<TerminDTO> terminDTOS = new ArrayList<>();
 
         for (Termin termin : terminList) {
@@ -44,8 +41,7 @@ public class TerminController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             value = "/pretraga")
     public ResponseEntity<List<TerminDTO>> getTerminiByCrit(@RequestBody KriterijumDTO kriterijumDolazna) throws Exception {
-        // Kreiramo objekat klase Employee, tako što za vrednosti atributa uzimamo
-        // vrednosti iz primljenog DTO objekta
+
         KriterijumDTO kriterijumDTO = new KriterijumDTO(kriterijumDolazna.isSviTermini(), kriterijumDolazna.getCena(), kriterijumDolazna.getTrajanje(), kriterijumDolazna.getMesec(), kriterijumDolazna.getNaziv(),kriterijumDolazna.getTip(),kriterijumDolazna.getOpis());
 
         List<TerminDTO> terminiList = this.terminService.pretragaKriterijum(kriterijumDTO);

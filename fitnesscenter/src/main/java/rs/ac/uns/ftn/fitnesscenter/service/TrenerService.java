@@ -18,4 +18,6 @@ public interface TrenerService {
     Trener create(Trener trener) throws Exception;
 
     void delete(Long id);
+
+    public Trener deactivate(Long id) throws Exception;
 }
