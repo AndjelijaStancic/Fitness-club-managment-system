@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fitness</title>
+    <link href="css/addcentre.css" type="text/css" rel="Stylesheet"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
+    <script src="../js/centar.js"></script>
+</head>
+<body>
+
+<nav>
+    <div class="menu-bar">  
+        <ul>
+            <li><a href="pocetna.html">POČETNA STRANICA</a></li>
+            <li><a href="approval.html">ODOBRENJE</a></li>
+            <li class="active"><a href="addcentre.html">FITNESS CENTAR</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="fitnes-form">
+    <h1>Dodaj novi Fitness Centar</h1>
+    <form action="#" method="post" name="fitnes">
+        <p>Ime</p>
+        <input type="text" name="naziv" placeholder="Unesite ime Fitness Centra" required>
+        <p>Adresa</p>
+        <input type="text" name="adresa" placeholder="Unesite adresu Fitness Centra" required>
+        <p>Broj telefona</p>
+        <input type="text" name="broj" placeholder="Unesite broj telefona Fitness Centra" required>
+        <p>Email</p>
+        <input type="email" name="emailadresa" placeholder="Unesite email Fitness Centra" required>
+        <button type="submit">DODAJ</button>
+    </form>
+</div>
+
+</body>
+</html>

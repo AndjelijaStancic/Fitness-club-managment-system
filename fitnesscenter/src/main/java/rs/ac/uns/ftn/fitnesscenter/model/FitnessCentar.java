@@ -11,18 +11,18 @@ import java.util.Set;
 public class FitnessCentar implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @Column
+    @Column(unique = true)
     private String naziv;
 
-    @Column
+    @Column(unique = true)
     private String adresa;
 
-    @Column(name="broj_telefona")
+    @Column(name="broj_telefona",unique = true)
     private String brojTelefona;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -32,6 +32,29 @@ public class FitnessCentar implements Serializable  {
     private Set<Sala> sale = new HashSet<>();
 
     public FitnessCentar() {
+    }
+
+    public FitnessCentar(Long id, String naziv, String adresa, String brojTelefona, String email) {
+        this.id = id;
+        this.naziv = naziv;
+        this.adresa = adresa;
+        this.brojTelefona = brojTelefona;
+        this.email = email;
+    }
+
+    public FitnessCentar(String naziv, String adresa, String brojTelefona, String email) {
+        this.naziv = naziv;
+        this.adresa = adresa;
+        this.brojTelefona = brojTelefona;
+        this.email = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNaziv() {

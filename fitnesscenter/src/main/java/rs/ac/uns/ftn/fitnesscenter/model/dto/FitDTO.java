@@ -1,38 +1,19 @@
 package rs.ac.uns.ftn.fitnesscenter.model.dto;
 
-import javax.persistence.Column;
-
-public class FitnessCentarDTO {
-    private Long id;
+public class FitDTO {
     private String naziv;
     private String adresa;
     private String brojTelefona;
     private String email;
 
-    public FitnessCentarDTO() {
-    }
-
-    public FitnessCentarDTO(Long id, String naziv, String adresa, String brojTelefona, String email) {
-        this.id = id;
+    public FitDTO(String naziv, String adresa, String brojTelefona, String email) {
         this.naziv = naziv;
         this.adresa = adresa;
         this.brojTelefona = brojTelefona;
         this.email = email;
     }
 
-    public FitnessCentarDTO(String naziv, String adresa, String brojTelefona, String email) {
-        this.naziv = naziv;
-        this.adresa = adresa;
-        this.brojTelefona = brojTelefona;
-        this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public FitDTO() {
     }
 
     public String getNaziv() {
@@ -67,3 +48,4 @@ public class FitnessCentarDTO {
         this.email = email;
     }
 }
+

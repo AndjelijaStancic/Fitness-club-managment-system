@@ -27,7 +27,7 @@ $(document).on("submit", "form", function (event) {
             sifra
 
         }
-        //console.log(registracija);
+        console.log(dodaj);
 
         $.ajax({
             type: "POST",
@@ -35,6 +35,7 @@ $(document).on("submit", "form", function (event) {
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(registracija),
+
             success: function (res) {
                 console.log("SUCCESS:\n", res);
                 alert("Registracija uspešna");
