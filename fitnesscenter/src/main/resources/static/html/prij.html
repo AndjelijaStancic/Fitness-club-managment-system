@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Fitness</title>
     <link href="css/styleslogin.css" type="text/css" rel="Stylesheet"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/prijava.js"></script>
 </head>
 <body>
 
@@ -23,17 +26,17 @@
 
     <div class="login-form">
         <h1>Prijava</h1>
-        <form action="#" method="post">
+        <form action="#" method="post" name="prijava">
             <p>Korisničko ime</p>
-            <input type="text" name="korisničko ime" placeholder="Korisničko ime" required>
+            <input type="text" name="kime" placeholder="Korisničko ime" required>
             <p>Šifra</p>
-            <input type ="password" name="šifra" placeholder="Šifra"required>
+            <input type ="password" name="sifra" placeholder="Šifra"required>
             <label class="reg-radio">Član Fitness Centra
-                <input id="btn1" type="radio" name="radio" value="Clan">
+                <input id="btn1" type="radio" name="radio" value="Clan" checked>
                 <span class="checkmark"></span>
               </label>
               <label class="reg-radio">Trener
-                <input id="btn1" type="radio" name="radio" value="Trener">
+                <input id="btn2" type="radio" name="radio" value="Trener">
                 <span class="checkmark"></span>
               </label>
             <button type="submit">prijavi se</button>

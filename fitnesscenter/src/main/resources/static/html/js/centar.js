@@ -13,7 +13,7 @@ $(document).on("submit", "form", function (event) {
     }
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/api/dodaj/",
+        url: "http://localhost:8080/api/dodajfitnes/dodaj/",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(dodaj),

@@ -10,6 +10,8 @@ public interface ClanFitnessCentraRepository extends JpaRepository<ClanFitnessCe
     List<ClanFitnessCentra> findByImeAndPrezime(String ime, String prezime);
 
     List<ClanFitnessCentra> findByImeIgnoreCase(String ime);
+
+    ClanFitnessCentra findByKorisnickoIme(String korisnickoIme);
 }
 
 

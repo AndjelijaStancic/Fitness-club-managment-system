@@ -14,4 +14,6 @@ public interface TrenerRepository extends JpaRepository<Trener, Long>{
     List<Trener> findByFitnessCentar_Naziv(String fitnessCentar);
 
     List<Trener> findByAktivan(boolean aktivan);
+
+    Trener findByKorisnickoIme(String korisnickoIme);
 }

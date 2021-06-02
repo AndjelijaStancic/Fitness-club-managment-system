@@ -20,4 +20,6 @@ public interface TrenerService {
     void delete(Long id);
 
     public Trener deactivate(Long id) throws Exception;
+
+    Trener findOne(String korisnickoIme);
 }

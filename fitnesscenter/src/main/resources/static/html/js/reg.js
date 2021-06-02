@@ -27,7 +27,6 @@ $(document).on("submit", "form", function (event) {
             sifra
 
         }
-        console.log(dodaj);
 
         $.ajax({
             type: "POST",

@@ -25,6 +25,12 @@ public class TrenerServiceImpl implements TrenerService {
         }
 
         @Override
+        public Trener findOne(String korisnickoIme){
+            Trener trener = this.trenerRepository.findByKorisnickoIme(korisnickoIme);
+            return trener;
+        }
+
+        @Override
         public List<Trener> findAll(){
             List<Trener> treneri = this.trenerRepository.findAll();
             return treneri;

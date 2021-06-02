@@ -2,8 +2,8 @@ INSERT INTO FITNESS_CENTAR(naziv, adresa, broj_telefona, email) VALUES ('Ultimat
 INSERT INTO FITNESS_CENTAR(naziv, adresa, broj_telefona, email) VALUES ('Healthy Mind', 'Knjaza Milosa 4', '021345323', 'healthy@gmail.com');
 INSERT INTO TRENER(korisnicko_ime, ime, prezime, sifra, email, datum_rodjenja, telefon, aktivan,obrisan, prosecna_ocena, fitness_centar_id) VALUES ('predrag1', 'Predrag', 'Stankovic', '1234', 'predrag@gmail.com', '1998-05-20', '0644222211', '1','0','2.4',1);
 INSERT INTO TRENER(korisnicko_ime, ime, prezime, sifra, email, datum_rodjenja, telefon, aktivan,obrisan, prosecna_ocena, fitness_centar_id) VALUES ('vukann', 'Vukan', 'Petrovic', 'ahsjfas', 'vukan@gmail.com', '2000-03-29', '0641622211', '0','0', '5.9', 1);
-INSERT INTO TRENER(korisnicko_ime, ime, prezime, sifra, email, datum_rodjenja, telefon, aktivan,obrisan, prosecna_ocena, fitness_centar_id) VALUES ('kata', 'Katarina', 'Milenkovic', 'ajskdf', 'kata@gmail.com', '2004-04-30', '064423451', '0','0', '2.9', 2);
-INSERT INTO TRENER(korisnicko_ime, ime, prezime, sifra, email, datum_rodjenja, telefon, aktivan,obrisan, prosecna_ocena, fitness_centar_id) VALUES ('isi1', 'Isidora', 'Petrovic', 'akshsjhd', 'isidora@gmail.com', '2003-12-31', '06543456', '0','0', '4.8', 1);
+INSERT INTO TRENER(korisnicko_ime, ime, prezime, sifra, email, datum_rodjenja, telefon, aktivan,obrisan, prosecna_ocena, fitness_centar_id) VALUES ('kata', 'Katarina', 'Milenkovic', '1234', 'kata@gmail.com', '2004-04-30', '064423451', '0','0', '2.9', 2);
+INSERT INTO TRENER(korisnicko_ime, ime, prezime, sifra, email, datum_rodjenja, telefon, aktivan,obrisan, prosecna_ocena, fitness_centar_id) VALUES ('isi1', 'Isidora', 'Petrovic', '1234', 'isidora@gmail.com', '2003-12-31', '06543456', '0','0', '4.8', 1);
 INSERT INTO SALA(kapacitet, oznaka_sale,fitness_centar_id) VALUES ('450', '1', 1);
 INSERT INTO SALA(kapacitet, oznaka_sale,fitness_centar_id) VALUES ('220', '2', 1);
 INSERT INTO SALA(kapacitet, oznaka_sale,fitness_centar_id) VALUES ('240', '3', 1);
