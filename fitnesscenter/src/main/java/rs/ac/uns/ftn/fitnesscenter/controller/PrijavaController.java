@@ -5,12 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.uns.ftn.fitnesscenter.model.Administrator;
 import rs.ac.uns.ftn.fitnesscenter.model.ClanFitnessCentra;
 import rs.ac.uns.ftn.fitnesscenter.model.Trener;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.ClanDTO;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.PrijDTO;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.PrijavaDTO;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.RegDTO;
+import rs.ac.uns.ftn.fitnesscenter.service.AdminService;
 import rs.ac.uns.ftn.fitnesscenter.service.ClanFitnessCentraService;
 import rs.ac.uns.ftn.fitnesscenter.service.TrenerService;
 
@@ -18,14 +20,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/prijava")
-public class prijavaController {
+public class PrijavaController {
     private final ClanFitnessCentraService clanFitnessCentraService;
     private final TrenerService trenerService;
+    private final AdminService adminService;
 
     @Autowired
-    public prijavaController(ClanFitnessCentraService clanFitnessCentraService, TrenerService trenerService) {
+    public PrijavaController(ClanFitnessCentraService clanFitnessCentraService, TrenerService trenerService, AdminService adminService) {
         this.clanFitnessCentraService = clanFitnessCentraService;
         this.trenerService = trenerService;
+        this.adminService = adminService;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -81,6 +85,33 @@ public class prijavaController {
             } else {
                 prijavaDTO.setPoruka("Uneli se pogrešnu šifru ili korisničko ime!");
                 prijavaDTO.setAllert(true);
+            }
+        }
+        return new ResponseEntity<>(prijavaDTO, HttpStatus.OK);
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            value = "/Admin")
+    public ResponseEntity<PrijavaDTO> prijavaAdmin(@RequestBody PrijDTO dolazna) throws Exception {
+        List<Administrator> svi = adminService.findAll();
+        PrijavaDTO prijavaDTO = new PrijavaDTO(dolazna.getKorisnickoIme(), dolazna.getSifra(), 1, "", false);
+        for (Administrator admin : svi) {
+            if (admin.getKorisnickoIme().equalsIgnoreCase(prijavaDTO.getKorisnickoIme()) && admin.getSifra().equals(prijavaDTO.getSifra())) {
+                if (admin.getAktivan() == true) {
+                    prijavaDTO.setPoruka("Uspešno ste se ulogovali!");
+                    prijavaDTO.setId(admin.getId());
+                    prijavaDTO.setAllert(false);
+                    return new ResponseEntity<>(prijavaDTO, HttpStatus.OK);
+                } else {
+                    prijavaDTO.setPoruka("Administartor nije aktivan! ");
+                    prijavaDTO.setAllert(true);
+                    return new ResponseEntity<>(prijavaDTO, HttpStatus.OK);
+                }
+            } else {
+                prijavaDTO.setPoruka("Uneli se pogrešnu šifru ili korisničko ime!");
+                prijavaDTO.setAllert(true);
+
             }
         }
         return new ResponseEntity<>(prijavaDTO, HttpStatus.OK);

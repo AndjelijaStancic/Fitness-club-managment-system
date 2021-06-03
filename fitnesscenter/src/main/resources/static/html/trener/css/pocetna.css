@@ -6,9 +6,29 @@
 body{
     background-image:url(../images/trener.jpg);
     background-size: cover;
+    background-repeat: no-repeat;
+    transition: 5s;
     background-attachment: fixed;
     font-family:Georgia, 'Times New Roman', Times, serif;
+
+    animation-name: animate;
+    animation-direction::alternate-reverse;
+    animation-duration: 10s;
+    animation-fill-mode:forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function:ease-in-out;
 }
+
+@keyframes animate{
+    50%{
+        background-image: url(../images/treneer.jpg);
+    }20%{
+        background-image: url(../images/y.jpg);
+    }
+}
+
+
 .menu-bar{
     background-color:rgba(83, 83, 83, 0.4);
     text-align:center;

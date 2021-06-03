@@ -50,6 +50,13 @@ body{
     margin: 0 auto;
     
 }
+.menu-bar button{
+    background-color: rgba(0, 0, 0, 0.486);
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13px;
+    font-display:inherit;
+}
 .fitnes-form{
     
     margin-left: 37%;
