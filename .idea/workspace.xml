@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fb36bb5-9631-404f-aa82-031a24c03c88" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/fitnesscenter/src/main/java/rs/ac/uns/ftn/fitnesscenter/controller/RegController.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitnesscenter/src/main/java/rs/ac/uns/ftn/fitnesscenter/controller/RegController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitnesscenter/src/main/resources/static/html/js/approval.js" beforeDir="false" afterPath="$PROJECT_DIR$/fitnesscenter/src/main/resources/static/html/js/approval.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitnesscenter/src/main/resources/static/html/js/prijava.js" beforeDir="false" afterPath="$PROJECT_DIR$/fitnesscenter/src/main/resources/static/html/js/prijava.js" afterDir="false" />
-    </list>
+    <list default="true" id="4fb36bb5-9631-404f-aa82-031a24c03c88" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +31,7 @@
       <updated>1622576723955</updated>
       <workItem from="1622576753886" duration="110000" />
       <workItem from="1622815925309" duration="274000" />
+      <workItem from="1622997058502" duration="3000" />
     </task>
     <servers />
   </component>
