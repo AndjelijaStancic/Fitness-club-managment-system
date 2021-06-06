@@ -52,9 +52,11 @@ public class RegController {
 
         return new ResponseEntity<>(trenerDTO, HttpStatus.CREATED);
     }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="zahtevi/{uloga}")
     public ResponseEntity<List<TrenerDTO>> getRequests(@PathVariable String uloga) {
-        if(uloga.equals("admin")){
+        System.out.println(uloga);
+        if(uloga.equalsIgnoreCase("admin")){
             List<TrenerDTO> treneri = this.trenerService.findRequests();
             return new ResponseEntity<>(treneri, HttpStatus.OK);
         }else{
@@ -62,8 +64,14 @@ public class RegController {
             return new ResponseEntity<>(treneri, HttpStatus.OK);
         }
     }
+    /*
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="zahtevi")
+    public ResponseEntity<List<TrenerDTO>> getRequests() {
+            List<TrenerDTO> treneri = this.trenerService.findRequests();
+            return new ResponseEntity<>(treneri, HttpStatus.OK);
 
-
+    }
+    */
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE,
             value = "/approve/{id}")

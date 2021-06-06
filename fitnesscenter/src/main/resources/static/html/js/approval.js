@@ -1,5 +1,5 @@
 $(document).ready(function (){
-   /* let uloga =  localStorage.getItem("uloga");
+    let uloga =  localStorage.getItem("uloga");
     if(uloga == null){
         localStorage.setItem("uloga","null");
         window.location.href ="../index.html";
@@ -13,10 +13,11 @@ $(document).ready(function (){
     if(uloga=="trener"){
         window.location.href="../trener/pocetna.html";
     }
-*/
+
+    console.log(uloga);
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/registracija/zahtevi"+uloga,
+        url: "http://localhost:8080/api/registracija/zahtevi/"+uloga,
         dataType: "json",
         success: function (res){
             for(i=0 ; i<res.length; i++){
@@ -33,6 +34,8 @@ $(document).ready(function (){
             }
         },
         error: function (res){
+            console.log(uloga);
+            console.log(res.length);
             console.log("ERROR:\n", res);
         }
 

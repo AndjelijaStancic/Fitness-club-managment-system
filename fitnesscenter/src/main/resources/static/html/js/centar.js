@@ -1,3 +1,18 @@
+$(document).ready(function (){
+    let uloga =  localStorage.getItem("uloga");
+    if(uloga == null){
+        localStorage.setItem("uloga","null");
+        window.location.href ="../index.html";
+    }
+    if(uloga == "null"){
+        window.location.href ="../index.html";
+    }
+    if(uloga=="clan"){
+        window.location.href ="../clan/pocetna.html";
+    }
+    if(uloga=="trener"){
+        window.location.href="../trener/pocetna.html";
+    }
 $(document).on("submit", "form", function (event) {
 // ajax poziv
     event.preventDefault();
@@ -13,7 +28,7 @@ $(document).on("submit", "form", function (event) {
     }
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/api/dodajfitnes/dodaj/",
+        url: "http://localhost:8080/api/dodajfitnes/dodaj/"+uloga,
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(dodaj),
@@ -27,4 +42,5 @@ $(document).on("submit", "form", function (event) {
             alert("Greška!");
         }
     });
+});
 });

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
     let uloga = localStorage.getItem("uloga");
     if (uloga == null) {
         localStorage.setItem("uloga", "null");
@@ -16,7 +16,7 @@ $(document).ready(function () {
         window.location.href = "../html/trener/pocetna.html";
     }
 });
-
+*/
 $(document).on("submit", "form", function (event) {
 // ajax poziv
     event.preventDefault();
