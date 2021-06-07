@@ -1,22 +1,22 @@
-/*$(document).ready(function () {
+$(document).ready(function () {
     let uloga = localStorage.getItem("uloga");
     if (uloga == null) {
         localStorage.setItem("uloga", "null");
     }
     if (uloga === "admin") {
-        alert("Vec ste prijavljeni!");
+        alert("Već ste prijavljeni!");
         window.location.href = "../html/admin/pocetna.html";
     }
     if (uloga === "clan") {
-        alert("Vec ste prijavljeni!");
+        alert("Već ste prijavljeni!");
         window.location.href = "../html/clan/pocetna.html";
     }
     if (uloga === "trener") {
-        alert("Vec ste prijavljeni!");
+        alert("Već ste prijavljeni!");
         window.location.href = "../html/trener/pocetna.html";
     }
 });
-*/
+
 $(document).on("submit", "form", function (event) {
 // ajax poziv
     event.preventDefault();
@@ -75,3 +75,4 @@ $(document).on("submit", "form", function (event) {
             }
         });
 });
+

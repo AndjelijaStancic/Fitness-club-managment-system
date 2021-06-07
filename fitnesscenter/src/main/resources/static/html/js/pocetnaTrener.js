@@ -16,3 +16,7 @@ $(document).ready(function () {
         window.location.href = "../clan/pocetna.html";
     }
 });
+function logOut(){
+    localStorage.setItem("uloga","null");
+    window.location.href = "../index.html";
+}

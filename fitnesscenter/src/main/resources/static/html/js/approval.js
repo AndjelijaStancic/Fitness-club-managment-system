@@ -85,3 +85,7 @@ $(document).on('click', '#approve',function (){
 
 
 });
+function logOut(){
+    localStorage.setItem("uloga","null");
+    window.location.href = "../index.html";
+}

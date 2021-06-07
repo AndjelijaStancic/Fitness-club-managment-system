@@ -47,6 +47,13 @@ body{
     text-decoration: none;
     color: white;
 }
+.menu-bar button{
+    background-color: rgba(0, 0, 0, 0.486);
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13px;
+
+}
 .active, .menu-bar ul li :hover
 {
     background-color:rgba(252, 227, 227, 0.288);

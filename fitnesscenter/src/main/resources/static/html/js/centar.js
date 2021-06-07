@@ -1,3 +1,7 @@
+function logOut(){
+    localStorage.setItem("uloga","null");
+    window.location.href = "../index.html";
+}
 $(document).ready(function (){
     let uloga =  localStorage.getItem("uloga");
     if(uloga == null){
