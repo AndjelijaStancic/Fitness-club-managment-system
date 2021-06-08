@@ -5,9 +5,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.fitnesscenter.model.FitnessCentar;
+import rs.ac.uns.ftn.fitnesscenter.model.Termin;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.FitDTO;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.FitnessCentarDTO;
+import rs.ac.uns.ftn.fitnesscenter.model.dto.TerminDTO;
 import rs.ac.uns.ftn.fitnesscenter.service.FitnessCentarService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -37,5 +42,20 @@ public class FitnessController {
             FitnessCentarDTO fitnessCentarDTO = new FitnessCentarDTO();
             return new ResponseEntity<>(fitnessCentarDTO, HttpStatus.CREATED);
         }
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/svicentri")
+    public ResponseEntity<List<FitnessCentarDTO>> getCentri() {
+        List<FitnessCentar> centriList = this.fitnessCentarService.findAll();
+        List<FitnessCentarDTO> centriDTOS = new ArrayList<>();
+
+        for (FitnessCentar centri : centriList) {
+
+            FitnessCentarDTO fitnessCentarDTO = new FitnessCentarDTO(centri.getId(), centri.getNaziv(), centri.getAdresa(),
+                    centri.getBrojTelefona(),centri.getEmail());
+            centriDTOS.add(fitnessCentarDTO);
+        }
+
+        return new ResponseEntity<>(centriDTOS, HttpStatus.OK);
     }
 }

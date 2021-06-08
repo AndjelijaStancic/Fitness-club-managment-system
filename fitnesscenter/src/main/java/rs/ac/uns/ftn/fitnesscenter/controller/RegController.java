@@ -5,10 +5,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.fitnesscenter.model.ClanFitnessCentra;
+import rs.ac.uns.ftn.fitnesscenter.model.FitnessCentar;
 import rs.ac.uns.ftn.fitnesscenter.model.Termin;
 import rs.ac.uns.ftn.fitnesscenter.model.Trener;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.*;
 import rs.ac.uns.ftn.fitnesscenter.service.ClanFitnessCentraService;
+import rs.ac.uns.ftn.fitnesscenter.service.FitnessCentarService;
 import rs.ac.uns.ftn.fitnesscenter.service.TrenerService;
 
 import java.util.ArrayList;
@@ -19,11 +21,13 @@ import java.util.List;
 public class RegController {
     private final ClanFitnessCentraService clanFitnessCentraService;
     private final TrenerService trenerService;
+    private final FitnessCentarService fitnessCentarService;
 
     @Autowired
-    public RegController(ClanFitnessCentraService clanFitnessCentraService, TrenerService trenerService) {
+    public RegController(ClanFitnessCentraService clanFitnessCentraService, TrenerService trenerService, FitnessCentarService fitnessCentarService) {
         this.clanFitnessCentraService = clanFitnessCentraService;
         this.trenerService = trenerService;
+        this.fitnessCentarService = fitnessCentarService;
     }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE,
@@ -44,11 +48,11 @@ public class RegController {
             value = "/Trener")
     public ResponseEntity<TrenerDTO> getTrener(@RequestBody RegDTO dolazna) throws Exception {
         Trener trener = new Trener(dolazna.getKorisnickoIme(),dolazna.getIme(),dolazna.getPrezime(),dolazna.getSifra(),
-                dolazna.getEmail(),dolazna.getDatumRodjenja(),dolazna.getKontaktTelefon(),false,false, 0.0);
+                dolazna.getEmail(),dolazna.getDatumRodjenja(),dolazna.getKontaktTelefon(),false,false,fitnessCentarService.findOne(dolazna.getIdfc()) );
         Trener noviTrener = trenerService.create(trener);
 
         TrenerDTO trenerDTO = new TrenerDTO(noviTrener.getId(),noviTrener.getIme(),noviTrener.getPrezime(),noviTrener.getEmail(),noviTrener.getKorisnickoIme(),
-                noviTrener.getTelefona(), noviTrener.getDatumRodjenja(),noviTrener.getSifra(), noviTrener.getAktivan());
+                noviTrener.getTelefona(), noviTrener.getDatumRodjenja(),noviTrener.getSifra(), noviTrener.getAktivan(),noviTrener.getFitnessCentar().getId());
 
         return new ResponseEntity<>(trenerDTO, HttpStatus.CREATED);
     }
@@ -79,7 +83,7 @@ public class RegController {
         Trener trener = trenerService.activate(id);
         TrenerDTO trenerDTO = new TrenerDTO(trener.getId(),trener.getIme(),trener.getPrezime(),trener.getEmail(),
                 trener.getKorisnickoIme(),trener.getTelefona(),trener.getDatumRodjenja(),trener.getSifra(),
-                trener.getAktivan());
+                trener.getAktivan(), trener.getFitnessCentar().getId());
 
         return new ResponseEntity<>(trenerDTO,HttpStatus.OK);
     }
@@ -91,7 +95,7 @@ public class RegController {
         Trener trener = trenerService.deactivate(id);
         TrenerDTO trenerDTO = new TrenerDTO(trener.getId(),trener.getIme(),trener.getPrezime(),trener.getEmail(),
                 trener.getKorisnickoIme(),trener.getTelefona(),trener.getDatumRodjenja(),trener.getSifra(),
-                trener.getAktivan());
+                trener.getAktivan(),trener.getFitnessCentar().getId());
 
         return new ResponseEntity<>(trenerDTO,HttpStatus.OK);
     }

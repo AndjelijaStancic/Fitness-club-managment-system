@@ -1,5 +1,3 @@
-// Prikaz svih termina
-//$(document).ready(function () {
 $(document).on("submit", "form", function (event) {
 // ajax poziv
     event.preventDefault();
@@ -41,11 +39,6 @@ $(document).on("submit", "form", function (event) {
         opis
 
     }
-
-    
-
-
-
 
     $.ajax({
         type: "POST",                                                // HTTP metoda

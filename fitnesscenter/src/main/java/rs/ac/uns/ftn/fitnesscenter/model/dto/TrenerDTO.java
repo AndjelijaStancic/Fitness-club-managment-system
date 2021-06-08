@@ -1,5 +1,7 @@
 package rs.ac.uns.ftn.fitnesscenter.model.dto;
 
+import rs.ac.uns.ftn.fitnesscenter.model.FitnessCentar;
+
 import java.util.Date;
 
 public class TrenerDTO {
@@ -12,11 +14,9 @@ public class TrenerDTO {
     private Date datumRodjenja;
     private String sifra;
     private Boolean aktivan;
+    private Long idfc;
 
-    public TrenerDTO() {
-    }
-
-    public TrenerDTO(Long id, String ime, String prezime, String email, String korisnickoIme, String kontaktTelefon, Date datumRodjenja, String sifra, Boolean aktivan) {
+    public TrenerDTO(Long id, String ime, String prezime, String email, String korisnickoIme, String kontaktTelefon, Date datumRodjenja, String sifra, Boolean aktivan, Long idfc) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
@@ -26,6 +26,20 @@ public class TrenerDTO {
         this.datumRodjenja = datumRodjenja;
         this.sifra = sifra;
         this.aktivan = aktivan;
+        this.idfc = idfc;
+    }
+
+    public TrenerDTO() {
+    }
+
+
+
+    public Long getIdfc() {
+        return idfc;
+    }
+
+    public void setIdfc(Long idfc) {
+        this.idfc = idfc;
     }
 
     public Long getId() {

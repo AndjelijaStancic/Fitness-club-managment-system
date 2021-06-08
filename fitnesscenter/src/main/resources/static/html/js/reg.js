@@ -1,3 +1,38 @@
+$(document).ready(function (){
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/dodajfitnes/svicentri/",
+        dataType: "json",
+        success: function (res){
+
+            for(i=0 ; i<res.length; i++){
+                let list = "<option value='"+ res[i].id + "'>" +  res[i].id + "</option>"  ;
+                $("#dropdownlist").append(list);
+            }
+            for(i=0 ; i<res.length; i++){
+                let row = "<tr>";
+                row += "<td>" + res[i].id + "</td>";
+                row += "<td>" + res[i].naziv + "</td>";
+                row += "</tr>"
+                $("#tfcentri").append(row);
+            }
+        },
+        error: function (res){
+            console.log("ERROR:\n", res);
+        }
+    });
+});
+function prikaziCentre(){
+    let tabela = $("#fcentar");
+    tabela.show();
+}
+function sakrijCentre(){
+    let tabela = $("#fcentar");
+    tabela.hide();
+}
+
+
 $(document).on("submit", "form", function (event) {
 // ajax poziv
     event.preventDefault();
@@ -11,6 +46,12 @@ $(document).on("submit", "form", function (event) {
     let radioButton = document.forms['reg'].radio.value;
     let sifra = document.forms['reg'].sifra.value;
     let proveraSifre = document.forms['reg'].proveraSifre.value;
+    let idfc = document.forms['reg'].dropdownlist.value;
+
+    if(idfc == "" && radioButton == "Trener"){
+        alert("Morate izabrati id centra u kom želite da raite!");
+        return false;
+    }
 
     if(sifra !== proveraSifre) {
         alert("Šifre se ne podudaraju!");
@@ -24,8 +65,8 @@ $(document).on("submit", "form", function (event) {
             korisnickoIme,
             kontaktTelefon,
             datumRodjenja,
-            sifra
-
+            sifra,
+            idfc
         }
 
         $.ajax({

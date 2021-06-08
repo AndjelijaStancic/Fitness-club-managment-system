@@ -57,7 +57,7 @@ public class TrenerServiceImpl implements TrenerService {
             for(Trener trener : treners){
                 if(!trener.getAktivan() && !trener.getObrisan()){
                     TrenerDTO trenerDTO1 = new TrenerDTO(trener.getId(),trener.getIme(),trener.getPrezime(),trener.getEmail(),trener.getKorisnickoIme(),
-                            trener.getTelefona(),trener.getDatumRodjenja(),trener.getSifra(),false);
+                            trener.getTelefona(),trener.getDatumRodjenja(),trener.getSifra(),false, trener.getFitnessCentar().getId());
                     trenerDTO.add(trenerDTO1);
                 }
             }

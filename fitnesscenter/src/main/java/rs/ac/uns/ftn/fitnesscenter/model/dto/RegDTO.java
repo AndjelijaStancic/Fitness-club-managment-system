@@ -11,11 +11,13 @@ public class RegDTO {
     private String kontaktTelefon;
     private Date datumRodjenja;
     private String sifra;
+    private Long idfc;
 
     public RegDTO() {
     }
 
-    public RegDTO(String ime, String prezime, String email, String korisnickoIme, String kontaktTelefon, Date datumRodjenja, String sifra) {
+
+    public RegDTO(String ime, String prezime, String email, String korisnickoIme, String kontaktTelefon, Date datumRodjenja, String sifra, Long idfc) {
         this.ime = ime;
         this.prezime = prezime;
         this.email = email;
@@ -23,7 +25,15 @@ public class RegDTO {
         this.kontaktTelefon = kontaktTelefon;
         this.datumRodjenja = datumRodjenja;
         this.sifra = sifra;
+        this.idfc = idfc;
+    }
 
+    public Long getIdfc() {
+        return idfc;
+    }
+
+    public void setIdfc(Long idfc) {
+        this.idfc = idfc;
     }
 
     public String getIme() {

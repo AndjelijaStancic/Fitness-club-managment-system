@@ -33,21 +33,6 @@ public class TerminServiceImpl implements TerminService {
         Termin noviTermin = this.terminReposiroty.save(termin);
         return noviTermin;
     }
-    /*@Override
-    public Termin update(Termin termin) throws Exception {
-        Termin terminToUpdate = this.terminReposiroty.getOne(termin.getId());
-        if (terminToUpdate == null) {
-            throw new Exception("Termin ne postoji!");
-        }
-
-        // Postavljanje novog radnog mesta
-        terminToUpdate.setTermin(termin.getTermin());
-
-        // Čuvanje u bazi
-        Termin savedTr = this.terminReposiroty.save(terminToUpdate);
-        return savedTr;
-    }
-    */
 
     @Override
     public void delete(Long id) {

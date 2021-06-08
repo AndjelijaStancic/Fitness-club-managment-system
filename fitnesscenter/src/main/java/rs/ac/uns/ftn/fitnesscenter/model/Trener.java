@@ -50,8 +50,7 @@ public class Trener implements Serializable {
 
     public Trener() { }
 
-    public Trener(Long id, String korisnickoIme, String ime, String prezime, String sifra, String email, Date datumRodjenja, String telefon, Boolean aktivan, Boolean obrisan, double prosecnaOcena) {
-        this.id = id;
+    public Trener(String korisnickoIme, String ime, String prezime, String sifra, String email, Date datumRodjenja, String telefon, Boolean aktivan, Boolean obrisan, FitnessCentar fitnessCentar) {
         this.korisnickoIme = korisnickoIme;
         this.ime = ime;
         this.prezime = prezime;
@@ -61,10 +60,11 @@ public class Trener implements Serializable {
         this.telefon = telefon;
         this.aktivan = aktivan;
         this.obrisan = obrisan;
-        this.prosecnaOcena = prosecnaOcena;
+        this.prosecnaOcena = 0.0;
+        this.fitnessCentar = fitnessCentar;
     }
 
-    public Trener(String korisnickoIme, String ime, String prezime, String sifra, String email, Date datumRodjenja, String telefon, Boolean aktivan, Boolean obrisan, double prosecnaOcena) {
+    public Trener(String korisnickoIme, String ime, String prezime, String sifra, String email, Date datumRodjenja, String telefon, Boolean aktivan, Boolean obrisan) {
         this.korisnickoIme = korisnickoIme;
         this.ime = ime;
         this.prezime = prezime;
@@ -74,8 +74,9 @@ public class Trener implements Serializable {
         this.telefon = telefon;
         this.aktivan = aktivan;
         this.obrisan = obrisan;
-        this.prosecnaOcena = prosecnaOcena;
+        this.prosecnaOcena = 0.0;
     }
+
 
     public Long getId(){
         return id;
@@ -166,6 +167,10 @@ public class Trener implements Serializable {
     public Set<Termin> getTerminiTrenera() { return terminiTrenera; }
 
     public void setTerminiTrenera(Set<Termin> terminiTrenera) { this.terminiTrenera = terminiTrenera; }
+
+    public void setFitnessCentar(FitnessCentar fitnessCentar) {
+        this.fitnessCentar = fitnessCentar;
+    }
 
     public Boolean getObrisan() {
         return obrisan;
