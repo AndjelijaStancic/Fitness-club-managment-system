@@ -1,4 +1,18 @@
 $(document).ready(function (){
+    let uloga =  localStorage.getItem("uloga");
+    if(uloga == null){
+        localStorage.setItem("uloga","null");
+        window.location.href ="../index.html";
+    }
+    if(uloga == "null"){
+        window.location.href ="../index.html";
+    }
+    if(uloga=="clan"){
+        window.location.href ="../clan/pocetna.html";
+    }
+    if(uloga=="trener"){
+        window.location.href="../trener/pocetna.html";
+    }
 
     $.ajax({
         type: "GET",
@@ -43,13 +57,12 @@ $(document).on("submit", "form", function (event) {
     let korisnickoIme = document.forms['reg'].korisnickoime.value;
     let kontaktTelefon = document.forms['reg'].kontakttelefon.value;
     let datumRodjenja = document.forms['reg'].datumRodjenja.value;
-    let radioButton = document.forms['reg'].radio.value;
     let sifra = document.forms['reg'].sifra.value;
     let proveraSifre = document.forms['reg'].proveraSifre.value;
     let idfc = document.forms['reg'].dropdownlist.value;
 
-    if(idfc == "" && radioButton == "Trener"){
-        alert("Morate izabrati id centra u kom želite da radite!");
+    if(idfc == ""){
+        alert("Morate izabrati id centra u kom želite da trener radi!");
         return false;
     }
 
@@ -71,15 +84,15 @@ $(document).on("submit", "form", function (event) {
 
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/api/registracija/"+radioButton,
+            url: "http://localhost:8080/api/registracija/TrenerAdmin/",
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(registracija),
 
             success: function (res) {
                 console.log("SUCCESS:\n", res);
-                alert("Registracija uspešna");
-                window.location.href = "prij.html";
+                alert("Dodavanje uspešno!");
+
 
             },
             error: function () {
@@ -89,9 +102,3 @@ $(document).on("submit", "form", function (event) {
         });
     }
 });
-
-
-
-
-
-

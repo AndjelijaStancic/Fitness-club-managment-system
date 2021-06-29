@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>AddTrainer</title>
+    <link href="css/addt.css" type="text/css" rel="Stylesheet"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
+    <script src="../js/addtr.js"></script>
+    
+    
+</head>
+<body>
+
+    <nav>
+        <div class="menu-bar">  
+            <ul>
+                <li><a href="pocetna.html">POČETNA STRANICA</a></li>
+                <li class="active"><a href="approval.html">ODOBRENJE</a></li>
+                <li><a href="addcentre.html">FITNESS CENTAR</a></li>
+                <li class="active"><a href="addt.html">DODAJ TRENERA</a></li>
+                <li><button type="submit" onclick="logOut()">ODJAVI SE</button></li>
+                
+            </ul>
+        </div>
+    </nav>
+    <div class="header">
+        <div class="inner-header">
+            <h1>Dodavanje trenera</h1>
+        </div>
+    </div>
+
+<div class="reg-form">
+    <form action="#" method="post" name="reg">
+        <p>Ime</p>
+        <input type="text" name="ime" placeholder="Unesite Vaše ime" required>
+        <p>Prezime</p>
+        <input type="text" name="prezime" placeholder="Unesite Vaše prezime" required>
+        <p>Email</p>
+        <input type="email" name="email" placeholder="Unesite Vaš email" required>
+        <p>Korisničko ime</p>
+        <input type="text" name="korisnickoime" placeholder="Osmislite Vaše korisničko ime" required>
+        <p>Kontakt telefon</p>
+        <input type="text" name="kontakttelefon" placeholder="Unesite Vaš kontakt telefon" required>
+        <p>Datum rođenja</p>
+        <div class=datumrodj>
+        <input type="date" name="datumRodjenja" placeholder="Unesite datum rodjenja"  required>
+        </div>
+        <p>Šifra</p>
+        <input type ="password" name="sifra" placeholder="Osmislite Vašu šifru" required>
+        <p>Provera šifre</p>
+        <input type ="password" name="proveraSifre" placeholder="Unesite ponovo Vašu šifru" required>
+        <p>Fitness Centar u kojem želite da trener radi:</p>
+        <div class="fitness">  
+            <select id="dropdownlist" name="dropdownlist">
+                <option value="">opcije</option>
+            </select>
+        </div>
+        <button type="submit">Registruj se</button>
+    </form>
+    <button id="prikaziCentar" onclick="prikaziCentre()">Spisak centara</button>
+</div>
+<div class="tabela1">
+<div id="fcentar" hidden>
+    <table id="tfcentri">
+    <tr>
+        <td> <button onclick="sakrijCentre()">X</button></td>
+        
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>NAZIV FITNESS CENTRA</td>
+    </tr>
+        
+    </table>
+
+</body>
+</html>

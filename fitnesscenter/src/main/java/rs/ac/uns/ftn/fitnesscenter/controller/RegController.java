@@ -57,6 +57,20 @@ public class RegController {
         return new ResponseEntity<>(trenerDTO, HttpStatus.CREATED);
     }
 
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            value = "/TrenerAdmin")
+    public ResponseEntity<TrenerDTO> getTrenerAdmin(@RequestBody RegDTO dolazna) throws Exception {
+        Trener trener = new Trener(dolazna.getKorisnickoIme(),dolazna.getIme(),dolazna.getPrezime(),dolazna.getSifra(),
+                dolazna.getEmail(),dolazna.getDatumRodjenja(),dolazna.getKontaktTelefon(),true,false,fitnessCentarService.findOne(dolazna.getIdfc()) );
+        Trener noviTrener = trenerService.create(trener);
+
+        TrenerDTO trenerDTO = new TrenerDTO(noviTrener.getId(),noviTrener.getIme(),noviTrener.getPrezime(),noviTrener.getEmail(),noviTrener.getKorisnickoIme(),
+                noviTrener.getTelefona(), noviTrener.getDatumRodjenja(),noviTrener.getSifra(), noviTrener.getAktivan(),noviTrener.getFitnessCentar().getId());
+
+        return new ResponseEntity<>(trenerDTO, HttpStatus.CREATED);
+    }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="zahtevi/{uloga}")
     public ResponseEntity<List<TrenerDTO>> getRequests(@PathVariable String uloga) {
         System.out.println(uloga);
