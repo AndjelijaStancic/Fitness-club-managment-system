@@ -1,6 +1,6 @@
 package rs.ac.uns.ftn.fitnesscenter.model.dto;
 
-import javax.persistence.Column;
+
 
 public class FitnessCentarDTO {
     private Long id;

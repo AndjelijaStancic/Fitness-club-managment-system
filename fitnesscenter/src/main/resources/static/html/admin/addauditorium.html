@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fitness</title>
+    <link href="css/adda.css" type="text/css" rel="Stylesheet"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
+    <script src="../js/addauditorium.js"></script>
+</head>
+<body>
+
+<nav>
+    <div class="menu-bar">  
+        <ul>
+            <li><a href="pocetna.html">POČETNA STRANICA</a></li>
+            <li><a href="approval.html">ODOBRENJE</a></li>
+            <li><a href="addcentre.html">FITNESS CENTAR</a></li>
+            <li><a href="addt.html">DODAJ TRENERA</a></li>
+            <li class="active"><a href="addauditorium.html">DODAJ SALU</a></li>
+            <li><button type="submit" onclick="logOut()">ODJAVI SE</button></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="fitnes-form">
+    <h1>Dodaj salu u Fitness Centru</h1>
+    <form action="#" method="post" name="fitnes">
+        <p>Oznaka Sale</p>
+        <input type="text" name="oznakaSale" placeholder="Unesite oznaku sale" required>
+        <p>Kapacitet</p>
+        <input type="text" name="kapacitet" placeholder="Unesite kapacitet sale" required>
+        <p>Fitness Centar u kojem želite da dodate salu:</p>
+        <div class="fitness">  
+            <select id="dropdownlist" name="dropdownlist">
+                <option value="">opcije</option>
+            </select>
+        </div>
+        <button type="submit">DODAJ</button>
+    </form>
+    <button id="prikaziCentar" onclick="prikaziCentre()">Spisak centara</button>
+</div>
+<div class="tabela1">
+<div id="fcentar" hidden>
+    <table id="tfcentri">
+    <tr>
+        <td> <button onclick="sakrijCentre()">X</button></td>
+        
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>NAZIV FITNESS CENTRA</td>
+    </tr>
+        
+    </table>
+</div>
+
+</body>
+</html>

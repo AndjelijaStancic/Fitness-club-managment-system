@@ -4,10 +4,10 @@ INSERT INTO TRENER(korisnicko_ime, ime, prezime, sifra, email, datum_rodjenja, t
 INSERT INTO TRENER(korisnicko_ime, ime, prezime, sifra, email, datum_rodjenja, telefon, aktivan,obrisan, prosecna_ocena, fitness_centar_id) VALUES ('vukann', 'Vukan', 'Petrovic', 'ahsjfas', 'vukan@gmail.com', '2000-03-29', '0641622211', '0','0', '5.9', 1);
 INSERT INTO TRENER(korisnicko_ime, ime, prezime, sifra, email, datum_rodjenja, telefon, aktivan,obrisan, prosecna_ocena, fitness_centar_id) VALUES ('kata', 'Katarina', 'Milenkovic', '1234', 'kata@gmail.com', '2004-04-30', '064423451', '0','0', '2.9', 2);
 INSERT INTO TRENER(korisnicko_ime, ime, prezime, sifra, email, datum_rodjenja, telefon, aktivan,obrisan, prosecna_ocena, fitness_centar_id) VALUES ('isi1', 'Isidora', 'Petrovic', '1234', 'isidora@gmail.com', '2003-12-31', '06543456', '0','0', '4.8', 1);
-INSERT INTO SALA(kapacitet, oznaka_sale,fitness_centar_id) VALUES ('450', '1', 1);
-INSERT INTO SALA(kapacitet, oznaka_sale,fitness_centar_id) VALUES ('220', '2', 1);
-INSERT INTO SALA(kapacitet, oznaka_sale,fitness_centar_id) VALUES ('240', '3', 1);
-INSERT INTO SALA(kapacitet, oznaka_sale,fitness_centar_id) VALUES ('257', '2', 2);
+INSERT INTO SALA(kapacitet, oznaka_sale, active,fitness_centar_id) VALUES ('450' ,'1',0 , 1);
+INSERT INTO SALA(kapacitet, oznaka_sale, active,fitness_centar_id) VALUES ('220', '2',1, 1);
+INSERT INTO SALA(kapacitet, oznaka_sale, active,fitness_centar_id) VALUES ('240', '3', 0,1);
+INSERT INTO SALA(kapacitet, oznaka_sale, active,fitness_centar_id) VALUES ('257', '2',1 ,2);
 INSERT INTO CLAN_FITNESS_CENTRA(korisnicko_ime, ime, prezime, sifra, email, telefon, datum_rodjenja, aktivan) VALUES ('stancica_','Andjelija','Stancic','andja123','andjica.stancicc@gmail.com','0603424081','2000-08-05','1');
 INSERT INTO CLAN_FITNESS_CENTRA(korisnicko_ime, ime, prezime, sifra, email, telefon, datum_rodjenja, aktivan) VALUES ('dencica_','Aleksandra','Dencic','akiaki','aleksandra.dencic@gmail.com','066324821','2000-08-05','1');
 INSERT INTO CLAN_FITNESS_CENTRA(korisnicko_ime, ime, prezime, sifra, email, telefon, datum_rodjenja, aktivan) VALUES ('tacaa_','Tamara','Aleksic','tacaa1','tamara.aleksic@gmail.com','0692104220','2000-04-21','1');

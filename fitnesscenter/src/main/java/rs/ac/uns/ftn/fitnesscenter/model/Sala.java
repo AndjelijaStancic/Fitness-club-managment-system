@@ -9,13 +9,16 @@ import java.util.Set;
 public class Sala implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column
     private int kapacitet;
 
     @Column(name = "oznaka_sale")
     private int oznakaSale;
+
+    @Column
+    private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private FitnessCentar fitnessCentar;
@@ -26,11 +29,35 @@ public class Sala implements Serializable {
     public Sala() {
     }
 
-    public long getId() {
+    public Sala(long id, int kapacitet, int oznakaSale, Boolean active) {
+        this.id = id;
+        this.kapacitet = kapacitet;
+        this.oznakaSale = oznakaSale;
+        this.active = active;
+    }
+
+    public Sala(int kapacitet, int oznakaSale, Boolean active, FitnessCentar fitnessCentar) {
+        this.kapacitet = kapacitet;
+        this.oznakaSale = oznakaSale;
+        this.active = active;
+        this.fitnessCentar = fitnessCentar;
+    }
+
+    public Sala(Long id, int kapacitet, int oznakaSale, Boolean active, FitnessCentar fitnessCentar) {
+        this.id = id;
+        this.kapacitet = kapacitet;
+        this.oznakaSale = oznakaSale;
+        this.active = active;
+        this.fitnessCentar = fitnessCentar;
+    }
+
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -64,5 +91,13 @@ public class Sala implements Serializable {
 
     public void setTerminiSale(Set<Termin> terminiSale) {
         this.terminiSale = terminiSale;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

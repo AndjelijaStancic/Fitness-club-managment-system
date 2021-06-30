@@ -2,7 +2,6 @@ function logOut(){
     localStorage.setItem("uloga","null");
     window.location.href = "../index.html";
 }
-
 $(document).ready(function (){
     let uloga =  localStorage.getItem("uloga");
     if(uloga == null){
@@ -51,59 +50,34 @@ function sakrijCentre(){
     tabela.hide();
 }
 
-
-$(document).on("submit", "form", function (event) {
+    $(document).on("submit", "form", function (event) {
+        let uloga =  localStorage.getItem("uloga");
 // ajax poziv
-    event.preventDefault();
-
-    let ime = document.forms['reg'].ime.value;
-    let prezime = document.forms['reg'].prezime.value;
-    let email = document.forms['reg'].email.value;
-    let korisnickoIme = document.forms['reg'].korisnickoime.value;
-    let kontaktTelefon = document.forms['reg'].kontakttelefon.value;
-    let datumRodjenja = document.forms['reg'].datumRodjenja.value;
-    let sifra = document.forms['reg'].sifra.value;
-    let proveraSifre = document.forms['reg'].proveraSifre.value;
-    let idfc = document.forms['reg'].dropdownlist.value;
-
-    if(idfc == ""){
-        alert("Morate izabrati id centra u kom želite da trener radi!");
-        return false;
-    }
-
-    if(sifra !== proveraSifre) {
-        alert("Šifre se ne podudaraju!");
-        return false;
-    } else {
-
-        let registracija = {
-            ime,
-            prezime,
-            email,
-            korisnickoIme,
-            kontaktTelefon,
-            datumRodjenja,
-            sifra,
-            idfc
+        event.preventDefault();
+        let oznakaSale = document.forms['fitnes'].oznakaSale.value;
+        let kapacitet = document.forms['fitnes'].kapacitet.value;
+        let active = true;
+        let idFC = document.forms['fitnes'].dropdownlist.value;
+        let dodaj = {
+            oznakaSale,
+            kapacitet,
+            active,
+            idFC
         }
-
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/api/registracija/TrenerAdmin/",
+            url: "http://localhost:8080/api/dodajsalu/dodajS/"+uloga,
             dataType: "json",
             contentType: "application/json",
-            data: JSON.stringify(registracija),
-
-            success: function (res) {
-                console.log("SUCCESS:\n", res);
-                alert("Dodavanje uspešno!");
-
-
+            data: JSON.stringify(dodaj),
+            success: function (fitnes) {
+                console.log("SUCCESS:\n", fitnes);
+                alert("Uspešno ste dodali salu u fitness centar!");
             },
             error: function () {
                 console.log("ERROR:\n");
                 alert("Greška!");
             }
         });
-    }
+
 });
