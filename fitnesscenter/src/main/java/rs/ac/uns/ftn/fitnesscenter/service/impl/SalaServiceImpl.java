@@ -36,7 +36,7 @@ public class SalaServiceImpl implements SalaService {
         List<SalaDTO> sveSale = new ArrayList<>();
         List<SalaDTO> aktivne = new ArrayList<>();
         for (Sala sala : sale) {
-            SalaDTO salaDTO = new SalaDTO(sala.getId(),sala.getOznakaSale(),sala.getKapacitet(),true, sala.getFitnessCentar().getId());
+            SalaDTO salaDTO = new SalaDTO(sala.getId(),sala.getOznakaSale(),sala.getKapacitet(),sala.getActive(), sala.getFitnessCentar().getId());
             sveSale.add(salaDTO);
         }
         for (SalaDTO sala : sveSale) {
@@ -44,6 +44,8 @@ public class SalaServiceImpl implements SalaService {
                 aktivne.add(sala);
             }
         }
+        //int a = aktivne.toArray().length;
+        //System.out.println(a);
         return aktivne;
 
     }
@@ -71,7 +73,7 @@ public class SalaServiceImpl implements SalaService {
     public Sala deactivate(Long id) throws Exception{
         Sala sala = this.salaRepository.getOne(id);
         if(sala == null){
-            throw new Exception("Ne postoji trener sa ovim id-em");
+            throw new Exception("Ne postoji sala sa ovim id-em");
         }
         sala.setActive(false);
 

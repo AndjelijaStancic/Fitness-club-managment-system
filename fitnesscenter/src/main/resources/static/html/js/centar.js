@@ -39,7 +39,7 @@ $(document).on("submit", "form", function (event) {
         success: function (fitnes) {
             console.log("SUCCESS:\n", fitnes);
             alert("Uspešno ste dodali fitness centar");
-            window.location.href = "pocetna.html";
+            window.location.href="centri.html";
         },
         error: function () {
             console.log("ERROR:\n");

@@ -8,23 +8,34 @@ public class FitnessCentarDTO {
     private String adresa;
     private String brojTelefona;
     private String email;
+    private Boolean active;
 
     public FitnessCentarDTO() {
     }
 
-    public FitnessCentarDTO(Long id, String naziv, String adresa, String brojTelefona, String email) {
+    public FitnessCentarDTO(Long id, String naziv, String adresa, String brojTelefona, String email, Boolean active) {
         this.id = id;
         this.naziv = naziv;
         this.adresa = adresa;
         this.brojTelefona = brojTelefona;
         this.email = email;
+        this.active = active;
     }
 
-    public FitnessCentarDTO(String naziv, String adresa, String brojTelefona, String email) {
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public FitnessCentarDTO(String naziv, String adresa, String brojTelefona, String email, Boolean active) {
         this.naziv = naziv;
         this.adresa = adresa;
         this.brojTelefona = brojTelefona;
         this.email = email;
+        this.active = active;
     }
 
     public Long getId() {

@@ -25,6 +25,9 @@ public class FitnessCentar implements Serializable  {
     @Column(unique = true)
     private String email;
 
+    @Column
+    private Boolean active;
+
     @OneToMany(mappedBy = "fitnessCentar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Trener> treneri = new HashSet<>();
 
@@ -34,19 +37,29 @@ public class FitnessCentar implements Serializable  {
     public FitnessCentar() {
     }
 
-    public FitnessCentar(Long id, String naziv, String adresa, String brojTelefona, String email) {
+    public FitnessCentar(Long id, String naziv, String adresa, String brojTelefona, String email, Boolean active) {
         this.id = id;
         this.naziv = naziv;
         this.adresa = adresa;
         this.brojTelefona = brojTelefona;
         this.email = email;
+        this.active = active;
     }
 
-    public FitnessCentar(String naziv, String adresa, String brojTelefona, String email) {
+    public FitnessCentar(String naziv, String adresa, String brojTelefona, String email, Boolean active) {
         this.naziv = naziv;
         this.adresa = adresa;
         this.brojTelefona = brojTelefona;
         this.email = email;
+        this.active = active;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Long getId() {

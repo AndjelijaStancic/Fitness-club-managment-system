@@ -73,6 +73,7 @@ function sakrijCentre(){
             success: function (fitnes) {
                 console.log("SUCCESS:\n", fitnes);
                 alert("Uspešno ste dodali salu u fitness centar!");
+                window.location.href = "sale.html";
             },
             error: function () {
                 console.log("ERROR:\n");

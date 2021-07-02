@@ -7,10 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.fitnesscenter.model.FitnessCentar;
 import rs.ac.uns.ftn.fitnesscenter.model.Sala;
-import rs.ac.uns.ftn.fitnesscenter.model.dto.FitDTO;
-import rs.ac.uns.ftn.fitnesscenter.model.dto.FitnessCentarDTO;
-import rs.ac.uns.ftn.fitnesscenter.model.dto.Sala1DTO;
-import rs.ac.uns.ftn.fitnesscenter.model.dto.SalaDTO;
+import rs.ac.uns.ftn.fitnesscenter.model.Termin;
+import rs.ac.uns.ftn.fitnesscenter.model.dto.*;
 import rs.ac.uns.ftn.fitnesscenter.service.FitnessCentarService;
 import rs.ac.uns.ftn.fitnesscenter.service.SalaService;
 
@@ -28,6 +26,23 @@ public class SalaController {
     public SalaController(SalaService salaService, FitnessCentarService fitnessCentarService ) {
         this.salaService = salaService;
         this.fitnessCentarService = fitnessCentarService;
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="/svi/{uloga}")
+    public ResponseEntity<List<SalaDTO>> getRequests(@PathVariable String uloga) {
+        if(uloga.equalsIgnoreCase("admin")){
+            List<SalaDTO> sale = this.salaService.findAllActive();
+            return new ResponseEntity<>(sale, HttpStatus.OK);
+        }else{
+            List<SalaDTO> sale = new ArrayList<>();
+            return new ResponseEntity<>(sale, HttpStatus.OK);
+        }
+    }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value ="/obrisi/{id}")
+    public ResponseEntity<Void> deleteA(@PathVariable Long id) throws Exception{
+        salaService.deactivate(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,

@@ -10,7 +10,7 @@ body{
     font-family:Georgia, 'Times New Roman', Times, serif;
 }
 .menu-bar{
-    background-color:rgba(95, 95, 95, 0.267);
+    background-color:rgba(0, 0, 0, 0.541);
     text-align:center;
 }
 .menu-bar ul{
@@ -29,7 +29,7 @@ body{
 }
 .active, .menu-bar ul li :hover
 {
-    background-color:rgba(252, 227, 227, 0.288);
+    background-color:rgba(173, 173, 173, 0.288);
     border-radius: 3px;
 }
 .reg-form{
