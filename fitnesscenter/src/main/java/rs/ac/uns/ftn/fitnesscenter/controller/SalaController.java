@@ -52,7 +52,6 @@ public class SalaController {
         if(uloga.equalsIgnoreCase("admin")) {
             Sala sala = new Sala(dolazna.getKapacitet(), dolazna.getOznakaSale(), true, fitnessCentarService.findOne(dolazna.getIdFC()));
             Sala novaSala = salaService.create(sala);
-
             SalaDTO salaDTO = new SalaDTO(novaSala.getOznakaSale(),novaSala.getKapacitet(), novaSala.getActive(), novaSala.getFitnessCentar().getId());
 
             return new ResponseEntity<>(salaDTO, HttpStatus.CREATED);
@@ -61,5 +60,27 @@ public class SalaController {
             return new ResponseEntity<>(salaDTO, HttpStatus.CREATED);
         }
     }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value="/menjaj/{idSale}")
+    public ResponseEntity<SalaDTO> changeA(@RequestBody Sala1DTO sala1DTO, @PathVariable Long idSale){
+        Sala salaPromena = salaService.findOne(idSale);
+        if(sala1DTO.getOznakaSale() != -1){
+            salaPromena.setOznakaSale(sala1DTO.getOznakaSale());
+        }
+        if(sala1DTO.getKapacitet() != -1){
+            salaPromena.setKapacitet(sala1DTO.getKapacitet());
+        }
 
+        if (sala1DTO.getIdFC() != -1) {
+            FitnessCentar novi = fitnessCentarService.findOne(sala1DTO.getIdFC());
+            salaPromena.setFitnessCentar(novi);
+        }
+        //System.out.println("PROLAZ 0");
+        Sala izmenjena = salaService.update(salaPromena);
+        //System.out.println("PROLAZ 1");
+        SalaDTO salaDTO = new SalaDTO(izmenjena.getOznakaSale(),izmenjena.getKapacitet(), izmenjena.getActive(), izmenjena.getFitnessCentar().getId());
+        //System.out.println("PROLAZ 2");
+        return new ResponseEntity<>(salaDTO, HttpStatus.CREATED);
+    }
 }
+
+

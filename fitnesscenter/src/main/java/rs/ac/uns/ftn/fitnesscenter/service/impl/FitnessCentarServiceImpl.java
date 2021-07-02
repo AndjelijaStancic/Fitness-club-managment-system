@@ -77,4 +77,10 @@ public class FitnessCentarServiceImpl implements FitnessCentarService {
         FitnessCentar centar = this.fitnessCentarRepository.getOne(id);
         return centar;
     }
+
+    @Override
+    public FitnessCentar update(FitnessCentar fitnessCentar)  {
+        FitnessCentar noviFC = this.fitnessCentarRepository.save(fitnessCentar);
+        return noviFC;
+    }
 }

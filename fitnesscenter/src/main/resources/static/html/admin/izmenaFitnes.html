@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fitness</title>
+    <link href="css/addcentre.css" type="text/css" rel="Stylesheet"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
+    <script src="../js/izmenaCentra.js"></script>
+    
+</head>
+<body>
+
+<nav>
+    <div class="menu-bar">  
+        <ul>
+            <li><a href="pocetna.html">POČETNA STRANICA</a></li>
+            <li><a href="approval.html">ODOBRENJE</a></li>
+            <li class="active"><a href="centri.html">FITNESS CENTRI</a></li>
+            <li><a href="addt.html">DODAJ TRENERA</a></li>
+            <li><a href="addauditorium.html">DODAJ SALU</a></li>
+            <li><button type="submit" onclick="logOut()">ODJAVI SE</button></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="fitnes-form">
+    <h1>Izmena Fitness Centra</h1>
+    <form action="#" method="post" name="fitnes">
+        <p>Ime</p>
+        <input type="text" name="naziv" placeholder="Unesite novo ime Fitness Centra" >
+        <p>Adresa</p>
+        <input type="text" name="adresa" placeholder="Unesite novu adresu Fitness Centra" >
+        <p>Broj telefona</p>
+        <input type="text" name="broj" placeholder="Unesite novi broj telefona Fitness Centra" >
+        <p>Email</p>
+        <input type="email" name="emailadresa" placeholder="Unesite novi email Fitness Centra" >
+        <button type="submit">IZMENI</button>
+
+
+    </form>
+</div>
+
+</body>
+</html>

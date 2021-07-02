@@ -20,4 +20,5 @@ public interface FitnessCentarService {
     FitnessCentar deactivate(Long id) throws Exception;
 
     List<FitnessCentarDTO> findAllActive();
+    FitnessCentar update(FitnessCentar fitnessCentar);
 }

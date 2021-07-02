@@ -45,6 +45,15 @@ $(document).ready(function (){
     });
 
 });
+
+$(document).on('click', '#change',function (){
+    let idFC = this.dataset.id;
+    localStorage.setItem("promenaCentar", idFC);
+    window.location.href = "izmenaFitnes.html";
+});
+
+
+
 $(document).on('click', '#delete',function (){
     let idC = this.dataset.id;
     $.ajax({

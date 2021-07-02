@@ -3,6 +3,9 @@
     margin: 0;
     box-sizing: border-box;
 }
+a{
+    text-decoration: none;
+}
 body{
     background-image:url(../images/admin.png);
     background-size: cover;
@@ -137,11 +140,17 @@ th {
     letter-spacing: 4px;
 }
 .still{
+    padding-top: 10px;
+    height: 40px;
     text-decoration: none;
     font-size: 26px;
     letter-spacing: 4px;
     text-decoration: none;
     color: white;
+}
+.still:hover{
+    background-color: rgba(147, 147, 148, 0.541);
+    cursor: pointer;
 }
 a{
     color:white;

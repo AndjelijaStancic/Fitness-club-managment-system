@@ -59,6 +59,12 @@ public class SalaServiceImpl implements SalaService {
     }
 
     @Override
+    public Sala update(Sala sala)  {
+        Sala novaSala = this.salaRepository.save(sala);
+        return novaSala;
+    }
+
+    @Override
     public Sala findOne(Long id) {
         Sala sala = this.salaRepository.getOne(id);
         return sala;

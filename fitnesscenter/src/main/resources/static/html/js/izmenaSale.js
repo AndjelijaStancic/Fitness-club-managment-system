@@ -1,3 +1,4 @@
+
 function logOut(){
     localStorage.setItem("uloga","null");
     window.location.href = "../index.html";
@@ -49,46 +50,46 @@ function sakrijCentre(){
     let tabela = $("#fcentar");
     tabela.hide();
 }
-
-    $(document).on("submit", "form", function (event) {
-        let uloga =  localStorage.getItem("uloga");
+$(document).on("submit", "form", function (event) {
+    let uloga =  localStorage.getItem("uloga");
 // ajax poziv
-        event.preventDefault();
-        let oznakaSale = document.forms['fitnes'].oznakaSale.value;
+    event.preventDefault();
+    let oznakaSale = document.forms['fitnes'].oznakaSale.value;
+    if(oznakaSale == "" || isNaN(oznakaSale)){
+        oznakaSale = -1;
+    }
+    let kapacitet = document.forms['fitnes'].kapacitet.value;
+    if(kapacitet == "" || isNaN(kapacitet) || kapacitet<1){
+        kapacitet = -1;
+    }
+    let idFC = document.forms['fitnes'].dropdownlist.value;
+    if(idFC == ""){
+        idFC = -1;
+    }
+    let active = true;
 
-        let kapacitet = document.forms['fitnes'].kapacitet.value;
-        let active = true;
-        let idFC = document.forms['fitnes'].dropdownlist.value;
-        let dodaj = {
-            oznakaSale,
-            kapacitet,
-            active,
-            idFC
+    let menjaj = {
+        oznakaSale,
+        kapacitet,
+        active,
+        idFC
+    }
+    promena = localStorage.getItem("promena");
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/api/dodajsalu/menjaj/"+ promena,
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(menjaj),
+        success: function (fitnes) {
+            console.log("SUCCESS:\n", fitnes);
+            alert("Uspešno ste izmenili salu!");
+            window.location.href = "sale.html";
+        },
+        error: function () {
+            console.log("ERROR:\n");
+            alert("Greška!");
         }
-        if(oznakaSale == "" || isNaN(oznakaSale)){
-            alert("Oznaka sale mora biti broj!");
-            return false;
-        }
-        if(kapacitet == "" || isNaN(kapacitet) || kapacitet<1){
-            alert("Kapacitet sale mora biti pozitivan broj!");
-            return false;
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/api/dodajsalu/dodajS/"+uloga,
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify(dodaj),
-            success: function (fitnes) {
-                console.log("SUCCESS:\n", fitnes);
-                alert("Uspešno ste dodali salu u fitness centar!");
-                window.location.href = "sale.html";
-            },
-            error: function () {
-                console.log("ERROR:\n");
-                alert("Greška!");
-            }
-        });
+    });
 
 });

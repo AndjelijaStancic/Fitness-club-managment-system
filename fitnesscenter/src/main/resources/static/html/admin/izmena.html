@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Fitness</title>
     <link href="css/adda.css" type="text/css" rel="Stylesheet"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
+    <script src="../js/izmenaSale.js"></script>
     
 </head>
 <body>
@@ -22,19 +25,19 @@
 </nav>
 
 <div class="fitnes-form">
-    <h1>IZMENA</h1>
+    <h1>IZMENA SALE</h1>
     <form action="#" method="post" name="fitnes">
         <p>Oznaka Sale</p>
-        <input type="text" name="oznakaSale" placeholder="Unesite oznaku sale" required>
+        <input type="text" name="oznakaSale" placeholder="Unesite novu oznaku sale" >
         <p>Kapacitet</p>
-        <input type="text" name="kapacitet" placeholder="Unesite kapacitet sale" required>
-        <p>Fitness Centar u kojem želite da dodate salu:</p>
+        <input type="text" name="kapacitet" placeholder="Unesite novi kapacitet sale" >
+        <p>Novi Fitness Centar u kojem želite da dodate salu:</p>
         <div class="fitness">  
             <select id="dropdownlist" name="dropdownlist">
                 <option value="">opcije</option>
             </select>
         </div>
-        <button type="submit">DODAJ</button>
+        <button type="submit">IZMENI</button>
     </form>
     <button id="prikaziCentar" onclick="prikaziCentre()">Spisak centara</button>
 </div>

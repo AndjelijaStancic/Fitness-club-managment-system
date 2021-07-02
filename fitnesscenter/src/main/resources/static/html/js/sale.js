@@ -30,7 +30,7 @@ $(document).ready(function (){
                     + "<td>" + res[i].kapacitet + "</td>"
                     + "<td>" + res[i].idFC + "</td>"
                     + "<td>" + " <button id = \"change\" type = \"submit\" data-id=" + res[i].id + ">IZMENI</button>" + "</td>"
-                    + "<td>" +" <button id = \"delete\" type = \"submit\" data-id=" + res[i].id + ">OBRISI</button>" + "</td>"
+                    + "<td>" +" <button id = \"delete\" type = \"submit\" data-id=" + res[i].id + ">OBRIŠI</button>" + "</td>"
                     + "</tr>";
                 $("#tabela").append(row);
             }
@@ -62,6 +62,13 @@ $.ajax({
     }
 });
 });
+
+$(document).on('click', '#change',function (){
+    let idSale = this.dataset.id;
+    localStorage.setItem("promena", idSale);
+    window.location.href = "izmena.html";
+});
+
 function logOut(){
     localStorage.setItem("uloga","null");
     window.location.href = "../index.html";
