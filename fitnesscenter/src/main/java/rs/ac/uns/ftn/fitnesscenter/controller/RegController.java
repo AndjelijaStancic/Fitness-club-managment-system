@@ -113,4 +113,14 @@ public class RegController {
 
         return new ResponseEntity<>(trenerDTO,HttpStatus.OK);
     }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="/podaci/{idT}")
+    public ResponseEntity<TrenerDTO> getData(@PathVariable Long idT) {
+        Trener trener = trenerService.findOne(idT);
+        TrenerDTO trenerDTO = new TrenerDTO(trener.getIme(), trener.getPrezime(), trener.getEmail(), trener.getKorisnickoIme(),
+                trener.getTelefona(),trener.getDatumRodjenja(), trener.getProsecnaOcena());
+        //System.out.println(idT);
+        System.out.println(trenerDTO.getProsecnaOcena());
+        return new ResponseEntity<>(trenerDTO, HttpStatus.OK);
+    }
+
 }

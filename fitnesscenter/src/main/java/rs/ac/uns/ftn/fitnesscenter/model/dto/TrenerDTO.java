@@ -15,6 +15,7 @@ public class TrenerDTO {
     private String sifra;
     private Boolean aktivan;
     private Long idfc;
+    private double prosecnaOcena;
 
     public TrenerDTO(Long id, String ime, String prezime, String email, String korisnickoIme, String kontaktTelefon, Date datumRodjenja, String sifra, Boolean aktivan, Long idfc) {
         this.id = id;
@@ -29,10 +30,35 @@ public class TrenerDTO {
         this.idfc = idfc;
     }
 
+    public TrenerDTO(String ime, String prezime, String email, String korisnickoIme, String kontaktTelefon, Date datumRodjenja) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.email = email;
+        this.korisnickoIme = korisnickoIme;
+        this.kontaktTelefon = kontaktTelefon;
+        this.datumRodjenja = datumRodjenja;
+    }
+
     public TrenerDTO() {
     }
 
+    public TrenerDTO(String ime, String prezime, String email, String korisnickoIme, String kontaktTelefon, Date datumRodjenja, double prosecnaOcena) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.email = email;
+        this.korisnickoIme = korisnickoIme;
+        this.kontaktTelefon = kontaktTelefon;
+        this.datumRodjenja = datumRodjenja;
+        this.prosecnaOcena = prosecnaOcena;
+    }
 
+    public double getProsecnaOcena() {
+        return prosecnaOcena;
+    }
+
+    public void setProsecnaOcena(double prosecnaOcena) {
+        this.prosecnaOcena = prosecnaOcena;
+    }
 
     public Long getIdfc() {
         return idfc;

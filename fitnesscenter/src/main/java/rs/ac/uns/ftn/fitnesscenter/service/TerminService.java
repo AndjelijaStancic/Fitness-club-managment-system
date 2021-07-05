@@ -16,4 +16,8 @@ public interface TerminService {
     //Termin update(Termin termin) throws Exception;
 
     void delete(Long id);
+
+    Termin findOne(Long idTermina);
+
+    Termin update(Termin termin);
 }

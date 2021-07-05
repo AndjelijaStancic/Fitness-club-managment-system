@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.fitnesscenter.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rs.ac.uns.ftn.fitnesscenter.model.Sala;
 import rs.ac.uns.ftn.fitnesscenter.model.Termin;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.KriterijumDTO;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.TerminDTO;
@@ -35,16 +36,29 @@ public class TerminServiceImpl implements TerminService {
     }
 
     @Override
+    public Termin update(Termin termin)  {
+        Termin noviTermin = this.terminReposiroty.save(termin);
+        return noviTermin;
+    }
+
+    @Override
     public void delete(Long id) {
         this.terminReposiroty.deleteById(id);
     }
+
+    @Override
+    public Termin findOne(Long id) {
+        Termin termin = this.terminReposiroty.getOne(id);
+        return termin;
+    }
+
 
     @Override
     public List<TerminDTO> pretragaKriterijum(KriterijumDTO kriterijumDTO) {
         List<Termin> termini = this.terminReposiroty.findAll();
         List<TerminDTO> kriterijum = new ArrayList<>();
         for (Termin termin : termini) {
-           TerminDTO terminDTO = new TerminDTO(termin.getId(),termin.getPocetakTermina(),termin.getKrajTermina(),termin.getTermin(),termin.getCena(),termin.getTrening().getNaziv(), termin.getTrening().getTipTreninga(),termin.getTrening().getOpis());
+           TerminDTO terminDTO = new TerminDTO(termin.getId(),termin.getPocetakTermina(),termin.getKrajTermina(),termin.getTrajanjeTermina(),termin.getCenaTermina(),termin.getTrening().getNaziv(), termin.getTrening().getTipTreninga(),termin.getTrening().getOpis());
             kriterijum.add(terminDTO);
         }
         if (kriterijumDTO.isSviTermini()) {

@@ -56,14 +56,17 @@ $(document).on("submit", "form", function (event) {
                 }else if(prijava.uloga == 2) {
                     console.log(uloga);
                     localStorage.setItem("uloga","clan");
+                    localStorage.setItem("id",prijava.id);
                     alert(prijava.poruka);
                     window.location.href = "../html/clan/pocetna.html";}
                 else if(prijava.uloga ==3){
                     localStorage.setItem("uloga","trener");
+                    localStorage.setItem("id",prijava.id);
                     alert(prijava.poruka);
                     window.location.href = "../html/trener/pocetna.html";
                 }else{
                     localStorage.setItem("uloga","admin");
+                    localStorage.setItem("id",prijava.id);
                     alert(prijava.poruka);
                     window.location.href = "../html/admin/pocetna.html";
                 }

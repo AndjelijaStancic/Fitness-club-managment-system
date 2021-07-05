@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.fitnesscenter.model.FitnessCentar;
 import rs.ac.uns.ftn.fitnesscenter.model.Sala;
 import rs.ac.uns.ftn.fitnesscenter.model.Termin;
+import rs.ac.uns.ftn.fitnesscenter.model.Trener;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.*;
 import rs.ac.uns.ftn.fitnesscenter.service.FitnessCentarService;
 import rs.ac.uns.ftn.fitnesscenter.service.SalaService;
+import rs.ac.uns.ftn.fitnesscenter.service.TrenerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,13 @@ import java.util.List;
 public class SalaController {
     private final SalaService salaService;
     private final FitnessCentarService fitnessCentarService;
+    private final TrenerService trenerService;
 
     @Autowired
-    public SalaController(SalaService salaService, FitnessCentarService fitnessCentarService ) {
+    public SalaController(SalaService salaService, FitnessCentarService fitnessCentarService ,TrenerService trenerService) {
         this.salaService = salaService;
         this.fitnessCentarService = fitnessCentarService;
+        this.trenerService=trenerService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="/svi/{uloga}")
@@ -37,6 +41,18 @@ public class SalaController {
             List<SalaDTO> sale = new ArrayList<>();
             return new ResponseEntity<>(sale, HttpStatus.OK);
         }
+    }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="/sale/{idTrenera}")
+    public ResponseEntity<List<SalaDTO>> getRequests(@PathVariable Long idTrenera) {
+        Trener trener = trenerService.findOne(idTrenera);
+        List<SalaDTO> sale = this.salaService.findAllActive();
+        List<SalaDTO> sale1 = new ArrayList<>();
+        for (SalaDTO sala : sale) {
+            if (trener.getFitnessCentar().getId() == sala.getIdFC()) {
+                sale1.add(sala);
+            }
+        }
+        return new ResponseEntity<>(sale1, HttpStatus.OK);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value ="/obrisi/{id}")

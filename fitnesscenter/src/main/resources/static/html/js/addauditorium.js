@@ -25,30 +25,16 @@ $(document).ready(function (){
         success: function (res){
 
             for(i=0 ; i<res.length; i++){
-                let list = "<option value='"+ res[i].id + "'>" +  res[i].id + "</option>"  ;
+                let list = "<option value='"+ res[i].id + "'>" +  res[i].naziv + "</option>"  ;
                 $("#dropdownlist").append(list);
             }
-            for(i=0 ; i<res.length; i++){
-                let row = "<tr>";
-                row += "<td>" + res[i].id + "</td>";
-                row += "<td>" + res[i].naziv + "</td>";
-                row += "</tr>"
-                $("#tfcentri").append(row);
-            }
+    
         },
         error: function (res){
             console.log("ERROR:\n", res);
         }
     });
 });
-function prikaziCentre(){
-    let tabela = $("#fcentar");
-    tabela.show();
-}
-function sakrijCentre(){
-    let tabela = $("#fcentar");
-    tabela.hide();
-}
 
     $(document).on("submit", "form", function (event) {
         let uloga =  localStorage.getItem("uloga");

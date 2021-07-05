@@ -13,8 +13,6 @@ $(document).ready(function (){
     if(uloga=="trener"){
         window.location.href="../trener/pocetna.html";
     }
-
-    console.log(uloga);
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/api/dodajsalu/svi/"+uloga,

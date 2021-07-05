@@ -10,6 +10,7 @@ import rs.ac.uns.ftn.fitnesscenter.model.Termin;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.*;
 import rs.ac.uns.ftn.fitnesscenter.service.FitnessCentarService;
 import rs.ac.uns.ftn.fitnesscenter.service.SalaService;
+import rs.ac.uns.ftn.fitnesscenter.service.TreningService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,13 @@ import java.util.List;
 public class FitnessController {
     private final FitnessCentarService fitnessCentarService;
     private final SalaService salaService;
+    private final TreningService treningService;
 
     @Autowired
-    public FitnessController(FitnessCentarService fitnessCentarService, SalaService salaService) {
+    public FitnessController(FitnessCentarService fitnessCentarService, SalaService salaService, TreningService treningService) {
         this.fitnessCentarService = fitnessCentarService;
         this.salaService = salaService;
+        this.treningService = treningService;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -56,6 +59,11 @@ public class FitnessController {
             return new ResponseEntity<>(centri, HttpStatus.OK);
         }
     }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="/svic")
+    public ResponseEntity<List<FitnessCentarDTO>> allcenters() {
+            List<FitnessCentarDTO> centri = this.fitnessCentarService.findAllActive();
+            return new ResponseEntity<>(centri, HttpStatus.OK);
+    }
 
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/obrisi/{id}")
@@ -86,7 +94,6 @@ public class FitnessController {
         if(!fitDTO.getEmail().equals("")){
             fitPromena.setEmail(fitDTO.getEmail());
         }
-
         //System.out.println("PROLAZ 0");
         FitnessCentar izmenjen = fitnessCentarService.update(fitPromena);
         //System.out.println("PROLAZ 1");
@@ -96,5 +103,15 @@ public class FitnessController {
         return new ResponseEntity<>(fitnessCentarDTO, HttpStatus.CREATED);
     }
 
-
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="/svitren/{uloga}")
+    public ResponseEntity<List<TreningDTO>> alltren(@PathVariable String uloga) {
+        if(uloga.equalsIgnoreCase("trener")){
+            List<TreningDTO> treningDTOS = this.treningService.findAll();
+            int a = treningDTOS.size();
+            return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+        }else{
+            List<TreningDTO> treningDTOS = new ArrayList<>();
+            return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+        }
+    }
 }

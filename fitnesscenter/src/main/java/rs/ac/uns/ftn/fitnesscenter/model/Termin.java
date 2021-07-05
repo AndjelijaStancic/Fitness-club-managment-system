@@ -45,6 +45,16 @@ public class Termin implements Serializable {
     public Termin() {
     }
 
+    public Termin(Date pocetakTermina, Date krajTermina, int trajanjeTermina, int cenaTermina, Trening trening, Trener trener, Sala sala) {
+        this.pocetakTermina = pocetakTermina;
+        this.krajTermina = krajTermina;
+        this.trajanjeTermina = trajanjeTermina;
+        this.cenaTermina = cenaTermina;
+        this.trening = trening;
+        this.trener = trener;
+        this.sala = sala;
+    }
+
     public Long getId() {
         return id;
     }
@@ -55,14 +65,6 @@ public class Termin implements Serializable {
 
     public Date getKrajTermina() {
         return krajTermina;
-    }
-
-    public int getTermin() {
-        return trajanjeTermina;
-    }
-
-    public int getCena() {
-        return cenaTermina;
     }
 
     public void setId(Long id) {
@@ -77,13 +79,6 @@ public class Termin implements Serializable {
         this.krajTermina = krajTermina;
     }
 
-    public void setTermin(int termin) {
-        this.trajanjeTermina = termin;
-    }
-
-    public void setCena(int cena) {
-        this.cenaTermina = cena;
-    }
 
     public Trening getTrening() {
         return trening;
@@ -129,5 +124,21 @@ public class Termin implements Serializable {
 
     public void setClanovi2(Set<ClanFitnessCentra> clanovi2) {
         this.clanovi2 = clanovi2;
+    }
+
+    public int getTrajanjeTermina() {
+        return trajanjeTermina;
+    }
+
+    public void setTrajanjeTermina(int trajanjeTermina) {
+        this.trajanjeTermina = trajanjeTermina;
+    }
+
+    public int getCenaTermina() {
+        return cenaTermina;
+    }
+
+    public void setCenaTermina(int cenaTermina) {
+        this.cenaTermina = cenaTermina;
     }
 }
