@@ -60,3 +60,21 @@ $(document).on('click', '#change',function (){
     localStorage.setItem("promenaTermin", idTermin);
     window.location.href = "izmenaTermina.html";
 });
+$(document).on('click', '#delete',function (){
+    let idT = this.dataset.id;
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:8080/api/termini/obrisiTermin/" + idT,
+        dataType: "json",
+        contentType: "application/json",
+        success: function (res) {
+            console.log("SUCCESS:\n", res);
+            alert("Uspešno obrisano!");
+            window.location.href="terminiTrener.html";
+        },
+        error: function (res) {
+            console.log("ERROR:\n", res);
+        }
+    });
+});
+

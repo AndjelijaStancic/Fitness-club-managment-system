@@ -71,13 +71,15 @@ public class TerminController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/sviTrener/{idT}")
     public ResponseEntity<List<TerminProduzenDTO>> getTerminiTrener(@PathVariable Long idT) {
-        List<Termin> terminList = this.terminService.findAll();
+        List<TerminProduzenDTO> terminList = this.terminService.findAllActive();
         List<TerminProduzenDTO> terminDTOS = new ArrayList<>();
 
-        for (Termin termin : terminList) {
-            if (termin.getTrener().getId() == idT) {
+        for (TerminProduzenDTO termin : terminList) {
+            if (termin.getIdTrenera() == idT) {
                 TerminProduzenDTO terminDTO = new TerminProduzenDTO(termin.getId(), termin.getPocetakTermina(),
-                        termin.getKrajTermina(), termin.getTrajanjeTermina(), termin.getCenaTermina(), termin.getTrening().getNaziv(), termin.getTrening().getTipTreninga(), termin.getTrening().getOpis(), termin.getSala().getOznakaSale(), termin.getSala().getId(),termin.getTrener().getId(), termin.getTrening().getId());
+                        termin.getKrajTermina(), termin.getTrajanjeTermina(), termin.getCenaTermina(), termin.getNazivTreninga(),
+                        termin.getTipTreninga(), termin.getOpisTreninga(), termin.getOznakaSale(), termin.getIdSale(),termin.getIdTrenera(),
+                        termin.getIdTreninga(),termin.getActive());
                 terminDTOS.add(terminDTO);
             }
         }
@@ -101,12 +103,13 @@ public class TerminController {
 
                         TerminProduzenDTO retVal = new TerminProduzenDTO(Long.valueOf(1), dolazna.getPocetakTermina(), dolazna.getKrajTermina(),
                                 -1, 0, "Termin se poklapa sa vec postojecim!",  "none", "none",
-                                0, Long.valueOf(1), Long.valueOf(0), Long.valueOf(1));
+                                0, Long.valueOf(1), Long.valueOf(0), Long.valueOf(1),false);
                         return new ResponseEntity<>(retVal, HttpStatus.OK);
                     }
                 }
             }
             Termin newTermin = new Termin();
+            newTermin.setActive(true);
             newTermin.setPocetakTermina(dolazna.getPocetakTermina());
             newTermin.setKrajTermina(dolazna.getKrajTermina());
             newTermin.setCenaTermina(dolazna.getCenaTermina());
@@ -117,12 +120,13 @@ public class TerminController {
             Termin terminRv = this.terminService.create(newTermin);
             TerminProduzenDTO retVal = new TerminProduzenDTO(newTermin.getId(), newTermin.getPocetakTermina(),newTermin.getKrajTermina(),
                     newTermin.getTrajanjeTermina(),newTermin.getCenaTermina(), "","","",
-                    newTermin.getSala().getOznakaSale(), newTermin.getSala().getId(), newTermin.getTrener().getId(), newTermin.getTrener().getId());
+                    newTermin.getSala().getOznakaSale(), newTermin.getSala().getId(), newTermin.getTrener().getId(),
+                    newTermin.getTrener().getId(),newTermin.getActive());
             return new ResponseEntity<>(retVal, HttpStatus.OK);
         } else {
             TerminProduzenDTO retVal = new TerminProduzenDTO(Long.valueOf(1), dolazna.getPocetakTermina(), dolazna.getKrajTermina(),
                     -2, 0, "Nemate prava na ovu komandu!",  "none", "none",
-                    0, Long.valueOf(1), Long.valueOf(1), Long.valueOf(1));
+                    0, Long.valueOf(1), Long.valueOf(1), Long.valueOf(1),false);
             return new ResponseEntity<>(retVal, HttpStatus.OK);
 
         }
@@ -133,32 +137,33 @@ public class TerminController {
             value = "/promeniTermin/{idTermina}")
     public ResponseEntity<TerminProduzenDTO> getTermin(@RequestBody TerminProduzenDTO dolazna, @PathVariable Long idTermina) throws Exception {
             Termin terminPromena = terminService.findOne(idTermina);
-            Date date = new Date(2000, 8, 6);
-                if(!dolazna.getPocetakTermina().before(date)){
+            Date date = new Date(110, 8, 6);
+                if(!dolazna.getPocetakTermina().before(date)) {
 
-                    if((dolazna.getPocetakTermina().before(terminPromena.getKrajTermina()) && dolazna.getPocetakTermina().after(terminPromena.getPocetakTermina())) ||
+                    if ((dolazna.getPocetakTermina().before(terminPromena.getKrajTermina()) && dolazna.getPocetakTermina().after(terminPromena.getPocetakTermina())) ||
                             (dolazna.getKrajTermina().before(terminPromena.getKrajTermina()) && dolazna.getKrajTermina().after(terminPromena.getPocetakTermina())) ||
                             (dolazna.getKrajTermina().after(terminPromena.getKrajTermina()) && dolazna.getPocetakTermina().before(terminPromena.getPocetakTermina())) ||
                             dolazna.getKrajTermina().equals(terminPromena.getKrajTermina()) || dolazna.getPocetakTermina().equals(terminPromena.getPocetakTermina())) {
 
                         TerminProduzenDTO retVal = new TerminProduzenDTO(Long.valueOf(1), dolazna.getPocetakTermina(), dolazna.getKrajTermina(),
-                                -1, 0, "Termin se poklapa sa vec postojecim!",  "none", "none",
-                                0, Long.valueOf(1), Long.valueOf(0), Long.valueOf(1));
+                                -1, 0, "Termin se poklapa sa vec postojecim!", "none", "none",
+                                0, Long.valueOf(1), Long.valueOf(0), Long.valueOf(1),false);
                         return new ResponseEntity<>(retVal, HttpStatus.OK);
                     }
-
-            }
-
-
+                }
                 if(dolazna.getCenaTermina()!=-1){
                     terminPromena.setCenaTermina(dolazna.getCenaTermina());
                 }
+                System.out.println(dolazna.getPocetakTermina());
+                System.out.println(date);
+                System.out.println(dolazna.getPocetakTermina().after(date));
                 if(dolazna.getPocetakTermina().after(date)){
+                    System.out.println("PROSAO");
                     terminPromena.setPocetakTermina(dolazna.getPocetakTermina());
                     terminPromena.setKrajTermina(dolazna.getKrajTermina());
                     terminPromena.setTrajanjeTermina(dolazna.getTrajanjeTermina());
                 }
-                if(dolazna.getOznakaSale() != -1){
+                if(dolazna.getIdSale() != -1){
                     terminPromena.setSala(this.salaService.findOne(dolazna.getIdSale()));
                 }
                 if(dolazna.getIdTreninga() != -1){
@@ -169,11 +174,16 @@ public class TerminController {
             Termin terminRv = this.terminService.update(terminPromena);
             TerminProduzenDTO retVal = new TerminProduzenDTO(terminPromena.getId(), terminPromena.getPocetakTermina(),terminPromena.getKrajTermina(),
                     terminPromena.getTrajanjeTermina(),terminPromena.getCenaTermina(), "","","",
-                    terminPromena.getSala().getOznakaSale(), terminPromena.getSala().getId(), terminPromena.getTrener().getId(), terminPromena.getTrener().getId());
+                    terminPromena.getSala().getOznakaSale(), terminPromena.getSala().getId(), terminPromena.getTrener().getId(), terminPromena.getTrener().getId(), terminPromena.getActive());
             return new ResponseEntity<>(retVal, HttpStatus.OK);
 
 
         }
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value ="/obrisiTermin/{id}")
+    public ResponseEntity<Void> deleteT(@PathVariable Long id) throws Exception{
+        terminService.deactivate(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
     }
 

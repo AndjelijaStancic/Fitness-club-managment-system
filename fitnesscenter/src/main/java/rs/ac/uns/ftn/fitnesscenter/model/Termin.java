@@ -24,6 +24,9 @@ public class Termin implements Serializable {
     @Column(name="cena_termina")
     private int cenaTermina;
 
+    @Column
+    private Boolean active;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Trening trening;
 
@@ -55,6 +58,17 @@ public class Termin implements Serializable {
         this.sala = sala;
     }
 
+    public Termin(Date pocetakTermina, Date krajTermina, int trajanjeTermina, int cenaTermina, Boolean active, Trening trening, Trener trener, Sala sala) {
+        this.pocetakTermina = pocetakTermina;
+        this.krajTermina = krajTermina;
+        this.trajanjeTermina = trajanjeTermina;
+        this.cenaTermina = cenaTermina;
+        this.active = active;
+        this.trening = trening;
+        this.trener = trener;
+        this.sala = sala;
+    }
+
     public Long getId() {
         return id;
     }
@@ -79,6 +93,13 @@ public class Termin implements Serializable {
         this.krajTermina = krajTermina;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     public Trening getTrening() {
         return trening;

@@ -43,7 +43,7 @@ public class SalaController {
         }
     }
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="/sale/{idTrenera}")
-    public ResponseEntity<List<SalaDTO>> getRequests(@PathVariable Long idTrenera) {
+    public ResponseEntity<List<SalaDTO>> getRequests1(@PathVariable Long idTrenera) {
         Trener trener = trenerService.findOne(idTrenera);
         List<SalaDTO> sale = this.salaService.findAllActive();
         List<SalaDTO> sale1 = new ArrayList<>();

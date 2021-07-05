@@ -62,19 +62,8 @@ $(document).on("submit", "form", function (event) {
 // ajax poziv
     event.preventDefault();
     let datum = document.forms['termin1'].datum.value;
-    if(datum == "" || datum == null){
-        datum = "2000-8-5";
-    }
     let pocetak = document.forms['termin1'].pocetak.value;
-    let pocetakTermina = datum;
-    pocetakTermina += "T";
-    pocetakTermina += pocetak;
-    pocetakTermina += ":00";
     let kraj = document.forms['termin1'].kraj.value;
-    let krajTermina = datum;
-    krajTermina += "T";
-    krajTermina += kraj;
-    krajTermina += ":00";
     let cenaTermina = document.forms['termin1'].cena.value;
     if(cenaTermina == "" || isNaN(cenaTermina)){
         cenaTermina = -1;
@@ -88,52 +77,73 @@ $(document).on("submit", "form", function (event) {
         idTreninga = -1;
     }
     let idTrenera = localStorage.getItem("id");
+    console.log(pocetak);
+    console.log(kraj);
+    console.log(datum);
+    if((datum != "" && (pocetak == "" || kraj == "")) || (pocetak != "" && (datum== "" || kraj == "")) || (kraj != "" && (datum== "" || pocetak == ""))) {
+        alert("Morate uneti i satnicu termina ukoliko menjate datum i obrnuto! ");
+        return false;
+    } else {
 
-    let satiPocetak = pocetak.substring(0,2);
-    let satiKraj = kraj.substring(0,2);
-    let minutiPocetak = pocetak.substring(3,5);
-    let minutiKraj = kraj.substring(3,5);
-    let trajanjeTermina = (Number(satiKraj)-Number(satiPocetak))*60;
-    trajanjeTermina += (Number(minutiKraj)-Number(minutiPocetak));
+        if(datum == "" || datum == null){
+            datum = "2000-08-05";
+            var pocetakTermina = datum;
+            var krajTermina = datum;
 
-    let menjaj = {
-        pocetakTermina,
-        krajTermina,
-        trajanjeTermina,
-        cenaTermina,
-        idSale,
-        idTreninga,
-        idTrenera
-    }
-
-
-    promenaTermin = localStorage.getItem("promenaTermin");
-
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/api/termini/promeniTermin/"+promenaTermin,
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify(menjaj),
-        success: function (res) {
-            console.log("SUCCESS:\n", res);
-            if(res.trajanjeTermina == -2){
-                alert(res.nazivTreninga);
-                window.location.href = "../../index.html";
-            } else if (res.trajanjeTermina == -1){
-                alert(res.nazivTreninga);
-            } else {
-                alert("Uspešno ste izmenili termin!");
-                window.location.href = "terminiTrener.html";
-                console.log(res.trajanjeTermina);
-            }
-
-
-        },
-        error: function () {
-            console.log("ERROR:\n");
-            alert("Greška!");
+        }else{
+            var pocetakTermina = datum;
+            pocetakTermina += "T";
+            pocetakTermina += pocetak;
+            pocetakTermina += ":00";
+            var krajTermina = datum;
+            krajTermina += "T";
+            krajTermina += kraj;
+            krajTermina += ":00";
         }
-    });
+        console.log(pocetakTermina);
+        console.log(krajTermina);
+        let satiPocetak = pocetak.substring(0,2);
+        let satiKraj = kraj.substring(0,2);
+        let minutiPocetak = pocetak.substring(3,5);
+        let minutiKraj = kraj.substring(3,5);
+        let trajanjeTermina = (Number(satiKraj)-Number(satiPocetak))*60;
+        trajanjeTermina += (Number(minutiKraj)-Number(minutiPocetak));
 
+        let menjaj = {
+            pocetakTermina,
+            krajTermina,
+            trajanjeTermina,
+            cenaTermina,
+            idSale,
+            idTreninga,
+            idTrenera
+        }
+
+
+        promenaTermin = localStorage.getItem("promenaTermin");
+        console.log(menjaj);
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/api/termini/promeniTermin/" + promenaTermin,
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(menjaj),
+            success: function (res) {
+                console.log("SUCCESS:\n", res);
+                if (res.trajanjeTermina == -1) {
+                    alert(res.nazivTreninga);
+                } else {
+                    alert("Uspešno ste izmenili termin!");
+                    window.location.href = "terminiTrener.html";
+                    console.log(res.trajanjeTermina);
+                }
+
+
+            },
+            error: function () {
+                console.log("ERROR:\n");
+                alert("Greška!");
+            }
+        });
+    }
 });

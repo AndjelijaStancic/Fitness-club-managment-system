@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.fitnesscenter.model.Sala;
 import rs.ac.uns.ftn.fitnesscenter.model.Termin;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.KriterijumDTO;
+import rs.ac.uns.ftn.fitnesscenter.model.dto.SalaDTO;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.TerminDTO;
+import rs.ac.uns.ftn.fitnesscenter.model.dto.TerminProduzenDTO;
 import rs.ac.uns.ftn.fitnesscenter.repository.TerminReposiroty;
 import rs.ac.uns.ftn.fitnesscenter.service.TerminService;
 
@@ -121,6 +123,37 @@ public class TerminServiceImpl implements TerminService {
          return kriterijumOpis;
     }
 
+    @Override
+    public Termin deactivate(Long id) throws Exception{
+        Termin termin = this.terminReposiroty.getOne(id);
+        if(termin == null){
+            throw new Exception("Ne postoji termin sa ovim id-em");
+        }
+        termin.setActive(false);
+
+        Termin termin1 = this.terminReposiroty.save(termin);
+        return termin1;
+    }
+
+    @Override
+    public List<TerminProduzenDTO> findAllActive() {
+        List<Termin> termins = this.terminReposiroty.findAll();
+        List<TerminProduzenDTO> sviTermini = new ArrayList<>();
+        List<TerminProduzenDTO> aktivne = new ArrayList<>();
+        for (Termin termin : termins) {
+            TerminProduzenDTO terminProduzenDTO = new TerminProduzenDTO( termin.getId(),termin.getPocetakTermina(),termin.getKrajTermina(),
+                    termin.getTrajanjeTermina(), termin.getCenaTermina(),termin.getTrening().getNaziv(),
+                    termin.getTrening().getTipTreninga(),termin.getTrening().getOpis(),termin.getSala().getOznakaSale(),
+                    termin.getSala().getId(),termin.getTrener().getId(),termin.getTrening().getId(),termin.getActive());
+            sviTermini.add(terminProduzenDTO);
+        }
+        for (TerminProduzenDTO terminProduzenDTO : sviTermini) {
+            if (terminProduzenDTO.getActive()) {
+                aktivne.add(terminProduzenDTO);
+            }
+        }
+        return aktivne;
+    }
 
 }
 

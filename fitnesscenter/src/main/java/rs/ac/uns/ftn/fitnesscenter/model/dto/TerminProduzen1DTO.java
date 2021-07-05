@@ -12,7 +12,7 @@ public class TerminProduzen1DTO {
     private String opisTreninga;
     private int oznakaSale;
 
-    public TerminProduzen1DTO(Date pocetakTermina, Date krajTermina, int trajanjeTermina, int cenaTermina, String nazivTreninga, String tipTreninga, String opisTreninga, int oznakaSale) {
+    public TerminProduzen1DTO(Date pocetakTermina, Date krajTermina, int trajanjeTermina, int cenaTermina, String nazivTreninga, String tipTreninga, String opisTreninga, int oznakaSale, Boolean active) {
         this.pocetakTermina = pocetakTermina;
         this.krajTermina = krajTermina;
         this.trajanjeTermina = trajanjeTermina;
@@ -22,6 +22,8 @@ public class TerminProduzen1DTO {
         this.opisTreninga = opisTreninga;
         this.oznakaSale = oznakaSale;
     }
+
+
 
     public int getTrajanjeTermina() {
         return trajanjeTermina;

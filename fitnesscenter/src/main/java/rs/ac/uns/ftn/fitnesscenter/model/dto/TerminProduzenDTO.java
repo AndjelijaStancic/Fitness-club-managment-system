@@ -15,8 +15,9 @@ public class TerminProduzenDTO {
     private Long idSale;
     private Long idTrenera;
     private Long idTreninga;
+    private Boolean active;
 
-    public TerminProduzenDTO(Long id, Date pocetakTermina, Date krajTermina, int trajanjeTermina, int cenaTermina, String nazivTreninga, String tipTreninga, String opisTreninga, int oznakaSale, Long idSale, Long idTrenera, Long idTreninga) {
+    public TerminProduzenDTO(Long id, Date pocetakTermina, Date krajTermina, int trajanjeTermina, int cenaTermina, String nazivTreninga, String tipTreninga, String opisTreninga, int oznakaSale, Long idSale, Long idTrenera, Long idTreninga,Boolean active) {
 
         this.id = id;
         this.pocetakTermina = pocetakTermina;
@@ -30,6 +31,7 @@ public class TerminProduzenDTO {
         this.idSale = idSale;
         this.idTrenera = idTrenera;
         this.idTreninga = idTreninga;
+        this.active = active;
     }
 
     public Long getIdTrenera() {
@@ -126,5 +128,13 @@ public class TerminProduzenDTO {
 
     public void setIdSale(Long idSale) {
         this.idSale = idSale;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
