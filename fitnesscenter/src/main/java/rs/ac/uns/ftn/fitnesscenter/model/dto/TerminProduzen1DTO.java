@@ -23,8 +23,6 @@ public class TerminProduzen1DTO {
         this.oznakaSale = oznakaSale;
     }
 
-
-
     public int getTrajanjeTermina() {
         return trajanjeTermina;
     }

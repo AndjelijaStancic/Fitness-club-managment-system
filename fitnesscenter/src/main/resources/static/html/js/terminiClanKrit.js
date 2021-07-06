@@ -1,3 +1,24 @@
+function logOut(){
+    localStorage.setItem("uloga","null");
+    window.location.href = "../index.html";
+}
+$(document).ready(function (){
+    let uloga =  localStorage.getItem("uloga");
+    if(uloga == null){
+        localStorage.setItem("uloga","null");
+        window.location.href ="../index.html";
+    }
+    if(uloga == "null"){
+        window.location.href ="../index.html";
+    }
+    if(uloga=="admin"){
+        window.location.href ="../admin/pocetna.html";
+    }
+    if(uloga=="trener"){
+        window.location.href="../trener/pocetna.html";
+    }
+});
+
 $(document).on("submit", "form", function (event) {
 // ajax poziv
     event.preventDefault();
@@ -18,11 +39,7 @@ $(document).on("submit", "form", function (event) {
     if( isNaN(trajanje) || trajanje == "" ){
         trajanje=9000000;
     }
-
-    let mesec = document.forms['forma'].mesec.value;
-    if( isNaN(mesec) || mesec == "" ){
-        mesec=9000000;
-    }
+    let mesec=9000000;
 
     let naziv = document.forms['forma'].naziv.value;
     let tip = document.forms['forma'].tip.value;
@@ -37,12 +54,11 @@ $(document).on("submit", "form", function (event) {
         naziv,
         tip,
         opis
-
     }
-
+idC = localStorage.getItem("id");
     $.ajax({
         type: "POST",                                                // HTTP metoda
-        url: "http://localhost:8080/api/termini/pretraga",                   // URL koji se gađa
+        url: "http://localhost:8080/api/termini/pretraga/"+idC,                   // URL koji se gađa
         dataType: "json",
         contentType:"application/json",
         data: JSON.stringify(kriterijum),
@@ -60,9 +76,8 @@ $(document).on("submit", "form", function (event) {
                 row += "<td class='brisanje'>" + res[i].nazivTreninga + "</td>";
                 row += "<td class='brisanje'>" + res[i].tipTreninga + "</td>";
                 row += "<td class='brisanje'>" + res[i].opisTreninga + "</td>";
-
-
-
+                let informacije = "<button id='info' data-id=" + res[i].id + "> VIŠE INFORMACIJA</button>";
+                row += "<td class='brisanje'>" + informacije + "</td>";
                 row += "</tr>";
                 $('#termini').append(row);
 
@@ -191,4 +206,3 @@ function sortirajBr(n) {
         }
     }
 }
-

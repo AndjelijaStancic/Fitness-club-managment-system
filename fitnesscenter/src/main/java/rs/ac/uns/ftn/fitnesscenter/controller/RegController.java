@@ -122,5 +122,12 @@ public class RegController {
         System.out.println(trenerDTO.getProsecnaOcena());
         return new ResponseEntity<>(trenerDTO, HttpStatus.OK);
     }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="/podaciClan/{idC}")
+    public ResponseEntity<ClanDTO> getDataClan(@PathVariable Long idC) {
+        ClanFitnessCentra clan = clanFitnessCentraService.findOne(idC);
+        ClanDTO clanDTO = new ClanDTO(clan.getIme(),clan.getPrezime(),clan.getEmail(),clan.getKorisnickoIme(),clan.getKontaktTelefon(),
+                clan.getDatumRodjenja(),clan.getSifra(),clan.getAktivan());
+        return new ResponseEntity<>(clanDTO, HttpStatus.OK);
+    }
 
 }

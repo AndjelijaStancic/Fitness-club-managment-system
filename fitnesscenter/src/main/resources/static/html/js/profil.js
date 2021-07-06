@@ -4,7 +4,7 @@ function logOut(){
 }
 
 $(document).ready(function (){
-  /*  let uloga =  localStorage.getItem("uloga");
+    let uloga =  localStorage.getItem("uloga");
     if(uloga == null){
         localStorage.setItem("uloga","null");
         window.location.href ="../index.html";
@@ -18,7 +18,7 @@ $(document).ready(function (){
     if(uloga=="admin"){
         window.location.href="../admin/pocetna.html";
     }
-*/
+
 idt=localStorage.getItem("id");
     console.log(idt);
 $.ajax({
