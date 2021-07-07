@@ -19,10 +19,7 @@ $(document).on("submit", "form", function (event) {
         trajanje=9000000;
     }
 
-    let mesec = document.forms['forma'].mesec.value;
-    if( isNaN(mesec) || mesec == "" ){
-        mesec=9000000;
-    }
+    let datum = document.forms['forma'].datum.value;
 
     let naziv = document.forms['forma'].naziv.value;
     let tip = document.forms['forma'].tip.value;
@@ -33,11 +30,10 @@ $(document).on("submit", "form", function (event) {
         sviTermini,
         cena,
         trajanje,
-        mesec,
+        datum,
         naziv,
         tip,
         opis
-
     }
 
     $.ajax({
@@ -70,6 +66,7 @@ $(document).on("submit", "form", function (event) {
         },
         error: function (res) {                                     // ova f-ja se izvršava posle neuspešnog zahteva
             console.log("ERROR:\n", res);
+            console.log(kriterijum);
         }
     });
 

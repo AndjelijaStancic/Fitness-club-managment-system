@@ -1,10 +1,12 @@
 package rs.ac.uns.ftn.fitnesscenter.model.dto;
 
+import java.util.Date;
+
 public class KriterijumDTO {
     private boolean sviTermini;
     private int cena;
     private int trajanje;
-    private int mesec;
+    private Date datum;
     private String naziv;
     private String tip;
     private String opis;
@@ -12,11 +14,11 @@ public class KriterijumDTO {
     public KriterijumDTO() {
     }
 
-    public KriterijumDTO(boolean sviTermini, int cena, int trajanje, int mesec, String naziv, String tip, String opis) {
+    public KriterijumDTO(boolean sviTermini, int cena, int trajanje, Date datum, String naziv, String tip, String opis) {
         this.sviTermini = sviTermini;
         this.cena = cena;
         this.trajanje = trajanje;
-        this.mesec = mesec;
+        this.datum = datum;
         this.naziv = naziv;
         this.tip = tip;
         this.opis = opis;
@@ -46,12 +48,12 @@ public class KriterijumDTO {
         this.trajanje = trajanje;
     }
 
-    public int getMesec() {
-        return mesec;
+    public Date getDatum() {
+        return datum;
     }
 
-    public void setMesec(int mesec) {
-        this.mesec = mesec;
+    public void setDatum(Date datum) {
+        this.datum = datum;
     }
 
     public String getNaziv() {

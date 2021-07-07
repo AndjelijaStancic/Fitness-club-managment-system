@@ -50,20 +50,21 @@ public class TerminController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             value = "/pretraga")
     public ResponseEntity<List<TerminDTO>> getTerminiByCrit(@RequestBody KriterijumDTO kriterijumDolazna) throws Exception {
-
-        KriterijumDTO kriterijumDTO = new KriterijumDTO(kriterijumDolazna.isSviTermini(), kriterijumDolazna.getCena(), kriterijumDolazna.getTrajanje(), kriterijumDolazna.getMesec(), kriterijumDolazna.getNaziv(),kriterijumDolazna.getTip(),kriterijumDolazna.getOpis());
-
+        //System.out.println("A");
+        KriterijumDTO kriterijumDTO = new KriterijumDTO(kriterijumDolazna.isSviTermini(), kriterijumDolazna.getCena(), kriterijumDolazna.getTrajanje(), kriterijumDolazna.getDatum(), kriterijumDolazna.getNaziv(),kriterijumDolazna.getTip(),kriterijumDolazna.getOpis());
+        //System.out.println("B");
         List<TerminDTO> terminiList = this.terminService.pretragaKriterijum(kriterijumDTO);
-
+        //System.out.println("C");
 
         List<TerminDTO> terminDTOS = new ArrayList<>();
-
+        //System.out.println("E");
         for (TerminDTO termin : terminiList) {
-
             TerminDTO terminDTO = new TerminDTO(termin.getId(),termin.getPocetakTermina(),termin.getKrajTermina(),termin.getTrajanjeTermina(),termin.getCenaTermina(),termin.getNazivTreninga(),termin.getTipTreninga(),termin.getOpisTreninga());
             terminDTOS.add(terminDTO);
+            //System.out.println(termin.getId());
+            //System.out.println(termin.getKrajTermina());
+            //System.out.println(termin.getPocetakTermina());
         }
-
         return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
     }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -360,7 +361,7 @@ public class TerminController {
             value = "/pretraga/{idC}")
     public ResponseEntity<List<TerminDTO>> getTerminiByCritClan(@RequestBody KriterijumDTO kriterijumDolazna,@PathVariable Long idC) throws Exception {
 
-        KriterijumDTO kriterijumDTO = new KriterijumDTO(kriterijumDolazna.isSviTermini(), kriterijumDolazna.getCena(), kriterijumDolazna.getTrajanje(), kriterijumDolazna.getMesec(), kriterijumDolazna.getNaziv(),kriterijumDolazna.getTip(),kriterijumDolazna.getOpis());
+        KriterijumDTO kriterijumDTO = new KriterijumDTO(kriterijumDolazna.isSviTermini(), kriterijumDolazna.getCena(), kriterijumDolazna.getTrajanje(), kriterijumDolazna.getDatum(), kriterijumDolazna.getNaziv(),kriterijumDolazna.getTip(),kriterijumDolazna.getOpis());
 
         List<TerminDTO> terminiList = this.terminService.pretragaKriterijum(kriterijumDTO);
 

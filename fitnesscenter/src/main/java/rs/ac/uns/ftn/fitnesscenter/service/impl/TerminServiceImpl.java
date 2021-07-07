@@ -85,7 +85,7 @@ public class TerminServiceImpl implements TerminService {
             }
         }
         for(TerminDTO datum : kriterijumTrajanje){
-            if(datum.getPocetakTermina().getMonth()+1 <= kriterijumDTO.getMesec()){
+            if(datum.getPocetakTermina().after(kriterijumDTO.getDatum())){
                 kriterijumDatum.add(datum);
             }
         }
