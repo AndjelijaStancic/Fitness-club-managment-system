@@ -53,6 +53,12 @@ public class ClanServiceImpl implements ClanFitnessCentraService {
         return clan;
     }
 
+    @Override
+    public ClanFitnessCentra save(ClanFitnessCentra clanFitnessCentra) {
+        ClanFitnessCentra noviClan = this.clanFitnessCentraRepository.save(clanFitnessCentra);
+        return noviClan;
+    }
+
 
 
 }

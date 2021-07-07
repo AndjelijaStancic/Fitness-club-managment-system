@@ -75,42 +75,52 @@ th {
 .sviTermini tr:hover {background-color: #c2c2c27e;}
 
 .kriterijum{
-margin-top: 1cm;
-width: 100%;
-background-color: rgba(0, 0, 0, 0.822);
+    
+    margin-top: 1cm;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.822);
+
 }
 .kriterijum th{
-    height: 1.25cm;
+    border: 0px;
 }
 .kriterijum ::placeholder{
     font-size: 10px;
     text-align: center;
 }
-
-.kriterijum th:hover {background-color: #c2c2c27e;}
-#info{
-    background-color: rgb(124, 43, 199);
-    font-size:10px;
-    font-weight: bold;
-    border-radius: 10px;
-    width: 3cm;
-    border 0;
+.dugme{
+    height: 40px;
+    width: 100%;
     color: white;
+    background-color: rgba(54, 54, 54, 0.212);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    font-weight: 1000;
+    border: 2px solid white;
+}
+.dugme:hover{
+    color: rgb(54, 54, 54);
+    background-color: white;
+    cursor: pointer;
+}
+.dugme:active{
+    color: rgb(54, 54, 54);
+    background-color: rgb(180, 180, 180);    
+}
+#tabelaDugmad{
+    border: 0px;
+    margin-bottom: 3px;
 }
 
-.naslovCelija{
-    border-left: 0px;
-    border-right: 0px;
-}
-#infoDiv{
+#ocenaDiv{
     border: 3px solid rgb(253, 250, 250);
     color: white;
     background-color: rgb(54, 54, 54);
     font-family: 'Times New Roman', Times, serif;
     font-size: 16px;
-    width: 40vw;
+    width: 20vw;
     position: absolute;
-    left: 30vw;
+    left: 40vw;
     top: 30vh;
     
 }
@@ -125,3 +135,14 @@ background-color: rgba(0, 0, 0, 0.822);
     right: 10px;
     top: 5px;
 }
+
+#naslovOcene{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 32px;
+    border: 1.5px solid rgb(253, 250, 250);
+    color: white;
+}
+#moreInfo td{
+    border: 0px;
+}
+

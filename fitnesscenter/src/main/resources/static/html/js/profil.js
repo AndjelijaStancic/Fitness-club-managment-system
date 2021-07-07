@@ -28,6 +28,7 @@ $.ajax({
     success: function (res){
         console.log(res);
             let datum = res.datumRodjenja.substring(0,10);
+            let ocena = res.prosecnaOcena.toString().substring(0,4);
             let row = "";
             row += "<tr>"+"<td>IME</td><td>" + res.ime + "</td>"+"</tr>";
             row += "<tr>"+"<td>PREZIME</td><td>" + res.prezime +"</td>"+"</tr>";
@@ -35,7 +36,7 @@ $.ajax({
             row += "<tr>"+"<td>EMAIL</td><td>" + res.email +"</td>"+"</tr>";
             row += "<tr>"+"<td>DATUM ROĐENJA</td><td>" + datum +"</td>"+"</tr>";
             row += "<tr>"+"<td>TELEFON</td><td>" + res.kontaktTelefon +"</td>"+"</tr>";
-            row += "<tr>"+"<td>PROSEČNA OCENA</td><td>" + res.prosecnaOcena +"</td>"+"</tr>";
+            row += "<tr>"+"<td>PROSEČNA OCENA</td><td>" + ocena +"</td>"+"</tr>";
             $("#tabela").append(row);
 
     },

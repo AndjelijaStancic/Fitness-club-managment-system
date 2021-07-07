@@ -9,9 +9,7 @@ import rs.ac.uns.ftn.fitnesscenter.model.FitnessCentar;
 import rs.ac.uns.ftn.fitnesscenter.model.Termin;
 import rs.ac.uns.ftn.fitnesscenter.model.Trener;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.*;
-import rs.ac.uns.ftn.fitnesscenter.service.ClanFitnessCentraService;
-import rs.ac.uns.ftn.fitnesscenter.service.FitnessCentarService;
-import rs.ac.uns.ftn.fitnesscenter.service.TrenerService;
+import rs.ac.uns.ftn.fitnesscenter.service.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +20,20 @@ public class RegController {
     private final ClanFitnessCentraService clanFitnessCentraService;
     private final TrenerService trenerService;
     private final FitnessCentarService fitnessCentarService;
+    private final OcenaService ocenaService;
+    private final TerminService terminService;
 
     @Autowired
-    public RegController(ClanFitnessCentraService clanFitnessCentraService, TrenerService trenerService, FitnessCentarService fitnessCentarService) {
+    public RegController(ClanFitnessCentraService clanFitnessCentraService, TrenerService trenerService, FitnessCentarService fitnessCentarService, OcenaService ocenaService, TerminService terminService) {
         this.clanFitnessCentraService = clanFitnessCentraService;
         this.trenerService = trenerService;
         this.fitnessCentarService = fitnessCentarService;
+        this.ocenaService = ocenaService;
+        this.terminService = terminService;
     }
+
+
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE,
             value = "/Clan")
@@ -116,10 +121,11 @@ public class RegController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="/podaci/{idT}")
     public ResponseEntity<TrenerDTO> getData(@PathVariable Long idT) {
         Trener trener = trenerService.findOne(idT);
+        this.ocenaService.updateOcena(trener.getId());
+        System.out.println(trener.getId());
         TrenerDTO trenerDTO = new TrenerDTO(trener.getIme(), trener.getPrezime(), trener.getEmail(), trener.getKorisnickoIme(),
                 trener.getTelefona(),trener.getDatumRodjenja(), trener.getProsecnaOcena());
         //System.out.println(idT);
-        System.out.println(trenerDTO.getProsecnaOcena());
         return new ResponseEntity<>(trenerDTO, HttpStatus.OK);
     }
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value ="/podaciClan/{idC}")

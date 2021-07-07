@@ -16,7 +16,8 @@
             <ul>
                 <li><a href="pocetna.html">POČETNA STRANICA</a></li>
                 <li><a href="profil.html">PROFIL</a></li>
-                <li class="active"><a href="terminClan.html">TERMINI</a></li>
+                <li class="active"><a href="terminClan.html">PRIJAVA</a></li>
+                <li><a href="terminiClan1.html">MOJI TERMINI</a></li>
                 <li><button type="submit" onclick="logOut()">ODJAVI SE</button></li>
             </ul>
         </div>
@@ -31,27 +32,27 @@
 <table>
 <form id="forma" name = "forma" method="POST">
 <tr>
-<th><label class="reg-radio">Prikaži sve termine
+<th class="naslovCelija"><label class="reg-radio">Prikaži sve termine
 <input id="btn1" type="radio" name="radio" value="svitermini">
     
 </label></th>
-<th><label class="reg-radio">Kriterijum
+<th class="naslovCelija"><label class="reg-radio">Kriterijum
 <input id="btn1" type="radio" name="radio" value="kriterijum">
 </label></th>
-<th><input type="text" name="maksimalnaCena" placeholder="maksimalna cena"></th>
-<th><input type="text" name="maksimalnoTrajanje" placeholder="maksimalno trajanje"></th>
-<th><select name ="naziv" id = "nazivId">
+<th class="naslovCelija"><input type="text" name="maksimalnaCena" placeholder="maksimalna cena"></th>
+<th class="naslovCelija"><input type="text" name="maksimalnoTrajanje" placeholder="maksimalno trajanje"></th>
+<th class="naslovCelija"><select name ="naziv" id = "nazivId">
     <option value="sve">NAZIV TRENINGA</option>
     <option value = "mrsavljenje">MRSAVLJENJE</option>
     <option value = "snaga">SNAGA</option>
     <option value = "linija">LINIJA</option>
 </th>
-<th><select name="tip" id = "tipId">
+<th class="naslovCelija"><select name="tip" id = "tipId">
     <option value="sve">TIP TRENINGA</option>
     <option value="grupni">GRUPNI</option>
     <option value="individualni">INDIVIDUALNI</option>
 </th>
-<th><select name="opis" id = "opisId">
+<th class="naslovCelija"><select name="opis" id = "opisId">
     <option value ="sve">OPIS TRENINGA</option>
     <option value ="aerobik">AEROBIK</option>
     <option value ="krosfit">KROSFIT</option>
@@ -60,7 +61,7 @@
     <option value ="joga">JOGA</option>
     <option value ="plivanje">PLIVANJE</option>
 </th>
-<th><input id = "trazi" type = "submit" value = "TRAŽI"/></th>
+<th class="naslovCelija"><input id = "trazi" type = "submit" value = "TRAŽI"/></th>
 </tr>
 </form>
 </table>
@@ -81,7 +82,14 @@
         <th>Više informacija</th>
     </tr>
 </table>
-<div>
+<div id="infoDiv" hidden>
+    <button id="closeDiv" onclick="zatvoriDiv()">X</button>
+    <table id="moreInfo">
+        
+    
+    </table>
 </div>
+
+
 </body>
 </html>

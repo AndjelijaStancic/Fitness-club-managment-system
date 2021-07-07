@@ -5,16 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rs.ac.uns.ftn.fitnesscenter.model.FitnessCentar;
-import rs.ac.uns.ftn.fitnesscenter.model.Sala;
-import rs.ac.uns.ftn.fitnesscenter.model.Termin;
+import rs.ac.uns.ftn.fitnesscenter.model.*;
 import rs.ac.uns.ftn.fitnesscenter.model.dto.*;
 import rs.ac.uns.ftn.fitnesscenter.service.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/api/termini")
@@ -71,6 +66,43 @@ public class TerminController {
 
         return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
     }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            value = "/odjava")
+    public ResponseEntity<OdjavaTerminDTO> odjavaSaTermina(@RequestBody OdjavaTerminDTO info) throws Exception {
+        ClanFitnessCentra clan = this.clanFitnessCentraService.findOne(info.getIdClana());
+        Set<Termin> prijavljeni = clan.getPrijavljeniTermini();
+        Set<Termin> updatedPrijavljeni = new HashSet<>();
+        for(Termin termin : prijavljeni){
+            if(termin.getId() != info.getIdTermina()){
+                updatedPrijavljeni.add(termin);
+            }
+        }
+        clan.setPrijavljeniTermini(updatedPrijavljeni);
+        this.clanFitnessCentraService.save(clan);
+        OdjavaTerminDTO retVal = new OdjavaTerminDTO(Long.valueOf(1), Long.valueOf(1), 0);
+
+        return new ResponseEntity<>(retVal, HttpStatus.OK);
+    }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            value = "/prijava")
+    public ResponseEntity<PrijavaTerminDTO> getTerminiByCrit(@RequestBody PrijavaTerminDTO dolazna) throws Exception {
+
+        Termin newTermin = this.terminService.findOne(dolazna.getIdTermina());
+        ClanFitnessCentra clan = this.clanFitnessCentraService.findOne(dolazna.getIdClana());
+
+        if(newTermin.getClanovi2().size() >= newTermin.getSala().getKapacitet()){
+            PrijavaTerminDTO retVal = new PrijavaTerminDTO(Long.valueOf(0), Long.valueOf(0), -1);
+            return new ResponseEntity<>(retVal, HttpStatus.OK);
+        }
+        Set<Termin> termini = clan.getPrijavljeniTermini();
+        termini.add(newTermin);
+        clan.setPrijavljeniTermini(termini);
+        this.clanFitnessCentraService.save(clan);
+        PrijavaTerminDTO retVal = new PrijavaTerminDTO(Long.valueOf(0), Long.valueOf(0), 0);
+        return new ResponseEntity<>(retVal, HttpStatus.OK);
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/sviTrener/{idT}")
     public ResponseEntity<List<TerminProduzenDTO>> getTerminiTrener(@PathVariable Long idT) {
@@ -87,6 +119,91 @@ public class TerminController {
             }
         }
         return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+
+    }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/prijavljeni/{idC}")
+    public ResponseEntity<List<TerminClanDTO>> getPrijavljeni(@PathVariable Long idC) {
+
+        ClanFitnessCentra clan = this.clanFitnessCentraService.findOne(idC);
+        Set<Termin> terminList = clan.getPrijavljeniTermini();
+        List<TerminClanDTO> terminDTOS = new ArrayList<>();
+        for (Termin termin : terminList) {
+
+            TerminClanDTO terminDTO = new TerminClanDTO(termin.getId(), termin.getPocetakTermina(),
+                    termin.getKrajTermina(), termin.getTrajanjeTermina(), termin.getCenaTermina(), termin.getTrening().getNaziv(),
+                    termin.getTrening().getTipTreninga(), termin.getTrening().getOpis(), termin.getSala().getOznakaSale(), termin.getTrener().getKorisnickoIme(),
+                    termin.getTrener().getProsecnaOcena(), termin.getSala().getKapacitet(), termin.getClanovi2().size());
+                terminDTOS.add(terminDTO);
+
+        }
+        return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+
+    }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/ocenjeni/{idC}")
+    public ResponseEntity<List<TerminClanDTO>> getOcenjeni(@PathVariable Long idC) {
+
+        ClanFitnessCentra clan = this.clanFitnessCentraService.findOne(idC);
+        Set<Termin> terminList = clan.getOdradjeniTermini();
+        List<TerminClanDTO> terminDTOS = new ArrayList<>();
+        for (Termin termin : terminList) {
+            Set<Ocena> ocene = termin.getOcene();
+            boolean x = false;
+            double mojaOcena = 0;
+            for(Ocena ocena : ocene){
+                if(ocena.getClanFitnessCentra().getId() == idC){
+                    x = true;
+                    mojaOcena = ocena.getOcena();
+                    break;
+                }
+            }
+            if(x) {
+                TerminClanDTO terminDTO = new TerminClanDTO(termin.getId(), termin.getPocetakTermina(),
+                        termin.getKrajTermina(), termin.getTrajanjeTermina(), termin.getCenaTermina(), termin.getTrening().getNaziv(),
+                        termin.getTrening().getTipTreninga(), termin.getTrening().getOpis(), termin.getSala().getOznakaSale(), termin.getTrener().getKorisnickoIme(),
+                        mojaOcena, termin.getSala().getKapacitet(), termin.getClanovi2().size());
+                terminDTOS.add(terminDTO);
+            }
+
+        }
+        return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+
+    }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/neocenjeni/{idC}")
+    public ResponseEntity<List<TerminClanDTO>> getNeocenjeni(@PathVariable Long idC) {
+
+        ClanFitnessCentra clan = this.clanFitnessCentraService.findOne(idC);
+        Set<Termin> terminList = clan.getOdradjeniTermini();
+        List<TerminClanDTO> terminDTOS = new ArrayList<>();
+        for (Termin termin : terminList) {
+            Set<Ocena> ocene = termin.getOcene();
+            boolean x = false;
+            for(Ocena ocena : ocene){
+                if(ocena.getClanFitnessCentra().getId() == idC){
+                    x = true;
+                    break;
+                }
+            }
+            if(!x) {
+                TerminClanDTO terminDTO = new TerminClanDTO(termin.getId(), termin.getPocetakTermina(),
+                        termin.getKrajTermina(), termin.getTrajanjeTermina(), termin.getCenaTermina(), termin.getTrening().getNaziv(),
+                        termin.getTrening().getTipTreninga(), termin.getTrening().getOpis(), termin.getSala().getOznakaSale(), termin.getTrener().getKorisnickoIme(),
+                        termin.getTrener().getProsecnaOcena(), termin.getSala().getKapacitet(), termin.getClanovi2().size());
+                terminDTOS.add(terminDTO);
+            }
+
+        }
+        return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+
+    }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/info/{idT}")
+    public ResponseEntity<TerminClanDTO> getTermin(@PathVariable Long idT) {
+        Termin termin = this.terminService.findOne(idT);
+        TerminClanDTO terminDTO = new TerminClanDTO(termin.getId(), termin.getPocetakTermina(),
+                termin.getKrajTermina(), termin.getTrajanjeTermina(), termin.getCenaTermina(), termin.getTrening().getNaziv(),
+                termin.getTrening().getTipTreninga(), termin.getTrening().getOpis(), termin.getSala().getOznakaSale(), termin.getTrener().getKorisnickoIme(),
+                termin.getTrener().getProsecnaOcena(), termin.getSala().getKapacitet(), termin.getClanovi2().size(), termin.getSala().getFitnessCentar().getNaziv());
+
+        return new ResponseEntity<>(terminDTO, HttpStatus.OK);
 
     }
 
@@ -205,6 +322,36 @@ public class TerminController {
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value ="/obrisiTermin/{id}")
     public ResponseEntity<Void> deleteT(@PathVariable Long id) throws Exception{
         terminService.deactivate(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value ="/proveri/{idC}")
+    public ResponseEntity<Void> srediTermine(@PathVariable Long idC) throws Exception{
+
+        ClanFitnessCentra updateClan = this.clanFitnessCentraService.findOne(idC);
+        Set<Termin> prijavljeni = updateClan.getPrijavljeniTermini();
+        Set<Termin> odradjeni = updateClan.getOdradjeniTermini();
+
+        Set<Termin> prijavljeniUpdated = new HashSet<>();
+        Set<Termin> odradjeniUpdated = new HashSet<>();
+        java.util.Date sad = new java.util.Date();
+        for(Termin termin : odradjeni){
+            if(termin.getKrajTermina().after(sad)) {
+                prijavljeniUpdated.add(termin);
+            } else {
+                odradjeniUpdated.add(termin);
+            }
+        }
+
+        for(Termin termin : prijavljeni){
+            if(termin.getKrajTermina().before(sad)) {
+                odradjeniUpdated.add(termin);
+            } else {
+                prijavljeniUpdated.add(termin);
+            }
+        }
+        updateClan.setPrijavljeniTermini(prijavljeniUpdated);
+        updateClan.setOdradjeniTermini(odradjeniUpdated);
+        this.clanFitnessCentraService.save(updateClan);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

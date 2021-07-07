@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fitness</title>
+    <link href="css/terClan.css" type="text/css" rel="Stylesheet"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
+    <script src="../js/terClan.js"></script>
+    
+</head>
+<body>
+
+    <nav>
+        <div class="menu-bar">  
+            <ul>
+                <li><a href="pocetna.html">POČETNA STRANICA</a></li>
+                <li><a href="profil.html">PROFIL</a></li>
+                <li><a href="terminClan.html">PRIJAVA</a></li>
+                <li class="active"><a href="terminiClan1.html">MOJI TERMINI</a></li>
+                <li><button type="submit" onclick="logOut()">ODJAVI SE</button></li>
+            </ul>
+        </div>
+    </nav>
+<div class="header">
+    <div class="inner-header">
+        <h1>ULTIMATE <br/>FITNESS</h1>
+    </div>
+</div>
+
+<div class="kriterijum">
+<table id="tabelaDugmad">
+<tr>
+    <th><button id="prijavljeni" class="dugme" onclick="prijavljeni()">PRIJAVLJENI</button></th>
+    <th><button id="ocenjeni" class="dugme" onclick="ocenjeni()">OCENJENI</button></th>
+    <th><button id="neocenjeni" class="dugme" onclick="neocenjeni()">NEOCENJENI</button></th>
+</tr>
+
+</table>
+</div>
+
+<div class="sviTermini">
+<div class="container">
+<table id="termini">
+    <thead>   
+        <tr>
+            <th>ID</th>
+            <th>Pocetak termina</th>
+            <th>Kraj termina</th>
+            <th>Cena termina</th>
+            <th>Opis treninga</th>
+            <th>Trener</th>
+            <th id="ocena" hidden>OCENA</th>
+            <th id="oceni" hidden>OCENI</th>
+            <th id="odjavi" hidden>ODJAVI</th>
+        </tr>
+    </thead>
+    <tbody id="sadrzaj">
+        
+    </tbody>
+</table>
+<div id="ocenaDiv" hidden>
+    <button id="closeDiv" onclick="zatvoriDiv()">X</button>
+    <table id="moreInfo">
+        <form id="ocenaForm" name="ocenaForm">
+            <tr>
+                <td id="naslovOcene" colspan="1">
+                    OCENJIVANJE
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    0<input type="range" id="vol" name="vol" min="0" max="10">10
+                </td> 
+            </tr>
+            
+            <tr>
+                <td colspan="1">
+                    <button type="submit">OCENI</button>
+                </td>
+            </tr>
+        </form>
+    
+    </table>
+</div>
+
+
+</body>
+</html>

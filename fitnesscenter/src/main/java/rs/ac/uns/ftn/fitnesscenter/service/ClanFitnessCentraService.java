@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface ClanFitnessCentraService {
 
+    ClanFitnessCentra save(ClanFitnessCentra noviClan);
+
     ClanFitnessCentra findOne(Long id);
 
     List<ClanFitnessCentra> findAll();

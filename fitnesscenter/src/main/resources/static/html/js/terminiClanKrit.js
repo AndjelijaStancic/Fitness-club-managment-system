@@ -89,6 +89,103 @@ idC = localStorage.getItem("id");
     });
 
 });
+
+$(document).on('click', '#info', function (){
+
+    let flush = $("#moreInfo");
+    flush.empty();
+    let show = $("#infoDiv");
+    show.show();
+
+    let idTermina = this.dataset.id;
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/termini/info/" + idTermina,
+        dataType: "json",
+        success: function (res){
+
+                let pocetakTermina=res.pocetakTermina;
+                let krajTermina=res.krajTermina;
+
+                let row = "<tr><th>ID:</th><td>"+ res.id + "</td></tr>";
+                row += "<tr><th>Pocetak:</th><td>"+ pocetakTermina.substring(0,10) + " " + pocetakTermina.substring(11,16) + "</td></tr>";
+                row += "<tr><th>Kraj:</th><td>"+ krajTermina.substring(0,10) + " " + krajTermina.substring(11,16) + "</td></tr>";
+                row += "<tr><th>Trajanje:</th><td>"+ res.trajanjeTermina + "</td></tr>";
+                row += "<tr><th>Cena:</th><td>"+ res.cenaTermina + "</td></tr>";
+                row += "<tr><th>Naziv:</th><td>"+ res.nazivTreninga + "</td></tr>";
+                row += "<tr><th>Tip:</th><td>"+ res.tipTreninga + "</td></tr>";
+                row += "<tr><th>Opis:</th><td>"+ res.opisTreninga + "</td></tr>";
+                row += "<tr><th>Oznaka sale:</th><td>"+ res.oznakaSale + "</td></tr>";
+                row += "<tr><th>Fitnes centar:</th><td>"+ res.fitnesCentar + "</td></tr>";
+                row += "<tr><th>Trener:</th><td>"+ res.korisnickoTrener + "</td></tr>";
+                row += "<tr><th>Ocena trenera:</th><td>"+ res.ocenaTrenera + "</td></tr>";
+                row += "<tr><th>Popunjenost:</th><td>"+ res.prijavljeni + "/" + res.kapacitet + "</td></tr>";
+                row += "<tr><th>Prijava:</th><td>"+ "<button id='prijava' data-id=" + res.id + "> PRIJAVI SE</button>" + "</td></tr>";
+
+
+                $("#moreInfo").append(row);
+
+        },
+        error: function (res){
+            //console.log(uloga);
+            //console.log(res.length);
+            console.log("ERROR:\n", res);
+        }
+
+    });
+
+
+
+});
+
+$(document).on('click', '#prijava', function (){
+
+
+
+    let idTermina = this.dataset.id;
+    let idClana = localStorage.getItem("id");
+
+    let prijava = {
+        idTermina,
+        idClana
+    }
+
+    $.ajax({
+        type: "POST",                                                // HTTP metoda
+        url: "http://localhost:8080/api/termini/prijava/",                   // URL koji se gađa
+        dataType: "json",
+        contentType:"application/json",
+        data: JSON.stringify(prijava),
+        success: function (res) {                                   // ova f-ja se izvršava posle uspešnog zahteva
+            console.log("SUCCESS:\n", res);                         // ispisujemo u konzoli povratnu vrednost
+            if(res.retVal == -1){
+                alert("Nema mesta na ovom terminu!");
+            } else {
+                alert("Uspesno ste se prijavili na termin!");
+                let flush = $("#moreInfo");
+                flush.empty();
+                let show = $("#infoDiv");
+                show.hide();
+                window.location.href = "terminClan.html";
+            }
+        },
+        error: function (res) {                                     // ova f-ja se izvršava posle neuspešnog zahteva
+            console.log("ERROR:\n", res);
+        }
+    });
+
+
+
+});
+
+function zatvoriDiv(){
+    let flush = $("#moreInfo");
+    flush.empty();
+    let hide = $("#infoDiv");
+    hide.hide();
+}
+
 function sortiraj(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("termini");

@@ -21,12 +21,12 @@ $(document).ready(function (){
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/dodajfitnes/svicentri/",
+        url: "http://localhost:8080/api/dodajfitnes/svicentri/" + uloga,
         dataType: "json",
         success: function (res){
 
             for(i=0 ; i<res.length; i++){
-                let list = "<option value='"+ res[i].id + "'>" +  res[i].id + "</option>"  ;
+                let list = "<option value='"+ res[i].id + "'>" +  res[i].naziv + "</option>"  ;
                 $("#dropdownlist").append(list);
             }
             for(i=0 ; i<res.length; i++){
@@ -97,6 +97,7 @@ $(document).on("submit", "form", function (event) {
             success: function (res) {
                 console.log("SUCCESS:\n", res);
                 alert("Dodavanje uspešno!");
+                window.location.href="pocetna.html";
 
 
             },
