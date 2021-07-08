@@ -122,7 +122,7 @@ public class RegController {
     public ResponseEntity<TrenerDTO> getData(@PathVariable Long idT) {
         Trener trener = trenerService.findOne(idT);
         this.ocenaService.updateOcena(trener.getId());
-        System.out.println(trener.getId());
+        //System.out.println(trener.getId());
         TrenerDTO trenerDTO = new TrenerDTO(trener.getIme(), trener.getPrezime(), trener.getEmail(), trener.getKorisnickoIme(),
                 trener.getTelefona(),trener.getDatumRodjenja(), trener.getProsecnaOcena());
         //System.out.println(idT);

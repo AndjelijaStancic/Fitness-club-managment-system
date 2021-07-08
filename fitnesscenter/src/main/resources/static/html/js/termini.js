@@ -37,13 +37,13 @@ $(document).on("submit", "form", function (event) {
     }
 
     $.ajax({
-        type: "POST",                                                // HTTP metoda
-        url: "http://localhost:8080/api/termini/pretraga",                   // URL koji se gađa
+        type: "POST",
+        url: "http://localhost:8080/api/termini/pretraga",
         dataType: "json",
         contentType:"application/json",
         data: JSON.stringify(kriterijum),
-        success: function (res) {                                   // ova f-ja se izvršava posle uspešnog zahteva
-            console.log("SUCCESS:\n", res);                         // ispisujemo u konzoli povratnu vrednost
+        success: function (res) {
+            console.log("SUCCESS:\n", res);
             for (i = 0; i < res.length; i++) {
                 let pocetakTermina=res[i].pocetakTermina;
                 let krajTermina=res[i].krajTermina;
@@ -64,9 +64,8 @@ $(document).on("submit", "form", function (event) {
 
             }
         },
-        error: function (res) {                                     // ova f-ja se izvršava posle neuspešnog zahteva
+        error: function (res) {
             console.log("ERROR:\n", res);
-            console.log(kriterijum);
         }
     });
 

@@ -31,15 +31,14 @@ $(document).ready(function (){
         }
     });
 });
-$(document).on('click', '#oceni', function (){
+$(document).on('click', '#oceni1', function (){
 
     let show = $("#ocenaDiv");
     show.show();
-
     let idTermina = this.dataset.id;
-    let obrisi = $("#row"+ idTermina);
-    obrisi.hide();
+
     localStorage.setItem("terminZaOcenjivanje", idTermina);
+
 });
 $(document).on('click', '#odjaviSe', function (){
 
@@ -174,7 +173,7 @@ function neocenjeni(){
             for (i = 0; i < res.length; i++) {
                     let pocetakTermina=res[i].pocetakTermina;
                     let krajTermina=res[i].krajTermina;
-                    let row = "<tr>";
+                    let row = "<tr id='row" + res[i].id + "'>";
                     row += "<td>" + res[i].id + "</td>";
                     row += "<td>" + pocetakTermina.substring(0,10) + " " + pocetakTermina.substring(11,16) + "</td>";
                     row += "<td>" + krajTermina.substring(0,10) + " " + krajTermina.substring(11,16) + "</td>";
@@ -182,7 +181,7 @@ function neocenjeni(){
                     row += "<td>" + res[i].cenaTermina + "</td>";
                     row += "<td>" + res[i].opisTreninga + "</td>";
                     row += "<td>" + res[i].korisnickoTrener + "</td>";
-                    let informacije = "<button id='oceni' data-id=" + res[i].id + "> OCENI </button>";
+                    let informacije = "<button id='oceni1' data-id=" + res[i].id + "> OCENI </button>";
                     row += "<td>" + informacije + "</td>";
                     row += "</tr>";
                     
@@ -206,6 +205,8 @@ function neocenjeni(){
 $(document).on("submit", "form", function (event) {
     let idClana =  localStorage.getItem("id");
     let idTermina =  localStorage.getItem("terminZaOcenjivanje");
+    let obrisi = $("#row"+ idTermina);
+    obrisi.hide();
 // ajax poziv
     event.preventDefault();
     let ocena = document.forms['ocenaForm'].vol.value;
@@ -227,7 +228,6 @@ $(document).on("submit", "form", function (event) {
         success: function (res) {
             console.log("SUCCESS:\n", res);
             alert("Uspešno ste ocenili termin!");
-            
         },
         error: function () {
             console.log("ERROR:\n");
